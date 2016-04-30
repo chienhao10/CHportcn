@@ -1,4 +1,5 @@
 # 有任何BUG请在帖子里面回报，或者群内，私聊，会GIT的直接汇报
+如果哪个英雄没汉化完全，麻烦回报！
 ### Before making an issue, check the to-do list before. https://github.com/berbb/PortAIO/blob/master/TO-DO.txt
 1. Make a GitHub accounts if you don't already.
 2. Sign in and go to : https://github.com/berbb/PortAIO/issues
