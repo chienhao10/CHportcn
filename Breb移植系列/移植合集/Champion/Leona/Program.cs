@@ -94,35 +94,35 @@
         /// <returns></returns>
         public void CreateMenu(Menu rootMenu)
         {
-            this.Menu = new Menu("ElLeona", "ElLeona");
+            this.Menu = new Menu("El雷欧娜", "ElLeona");
 
-            var comboMenu = new Menu("Combo", "Combo");
-            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.Q", "Use Q").SetValue(true));
-            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.W", "Use W").SetValue(true));
-            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.E", "Use E").SetValue(true));
-            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.R", "Use R").SetValue(false));
-            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.Count.Enemies", "Enemies in range for R", 2, 1, 5));
-            comboMenu.Add(new MenuItem("ElEasy.Leona.Hitchance", "Hitchance").SetValue(new StringList(new[] { "Low", "Medium", "High", "Very High" }, 3)));
-            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.Ignite", "Use Ignite").SetValue(true));
-
-
-            var harassMenu = new Menu("Harass", "Harass");
-            harassMenu.Add(new MenuItem("ElEasy.Leona.Harass.Q", "Use Q").SetValue(true));
-            harassMenu.Add(new MenuItem("ElEasy.Leona.Harass.E", "Use E").SetValue(true));
-            harassMenu.Add(new MenuItem("ElEasy.Leona.Harass.Player.Mana", "Minimum Mana").SetValue(new Slider(55)));
+            var comboMenu = new Menu("连招", "Combo");
+            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.Q", "使用 Q").SetValue(true));
+            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.W", "使用 W").SetValue(true));
+            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.E", "使用 E").SetValue(true));
+            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.R", "使用 R").SetValue(false));
+            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.Count.Enemies", "R范围内敌人数量", 2, 1, 5));
+            comboMenu.Add(new MenuItem("ElEasy.Leona.Hitchance", "命中率").SetValue(new StringList(new[] { "低", "中", "高", "非常高" }, 3)));
+            comboMenu.Add(new MenuItem("ElEasy.Leona.Combo.Ignite", "使用 点燃").SetValue(true));
 
 
-            var settingsMenu = new Menu("Settings", "Settings");
-            settingsMenu.Add(new MenuItem("ElEasy.Leona.Interrupt.Activated", "Interrupt spells").SetValue(true));
-            settingsMenu.Add(new MenuItem("ElEasy.Leona.GapCloser.Activated", "Anti gapcloser").SetValue(true));
+            var harassMenu = new Menu("骚扰", "Harass");
+            harassMenu.Add(new MenuItem("ElEasy.Leona.Harass.Q", "使用 Q").SetValue(true));
+            harassMenu.Add(new MenuItem("ElEasy.Leona.Harass.E", "使用 E").SetValue(true));
+            harassMenu.Add(new MenuItem("ElEasy.Leona.Harass.Player.Mana", "最低蓝量").SetValue(new Slider(55)));
 
 
-            var miscellaneousMenu = new Menu("Miscellaneous", "Miscellaneous");
-            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.off", "Turn drawings off").SetValue(true));
-            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.Q", "Draw Q").SetValue(new Circle()));
-            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.W", "Draw W").SetValue(new Circle()));
-            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.E", "Draw E").SetValue(new Circle()));
-            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.R", "Draw R").SetValue(new Circle()));
+            var settingsMenu = new Menu("设置", "Settings");
+            settingsMenu.Add(new MenuItem("ElEasy.Leona.Interrupt.Activated", "技能打断").SetValue(true));
+            settingsMenu.Add(new MenuItem("ElEasy.Leona.GapCloser.Activated", "防突进").SetValue(true));
+
+
+            var miscellaneousMenu = new Menu("杂项", "Miscellaneous");
+            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.off", "关闭线圈").SetValue(true));
+            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.Q", "显示 Q").SetValue(new Circle()));
+            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.W", "显示 W").SetValue(new Circle()));
+            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.E", "显示 E").SetValue(new Circle()));
+            miscellaneousMenu.Add(new MenuItem("ElEasy.Leona.Draw.R", "显示 R").SetValue(new Circle()));
         }
 
         public void Load()

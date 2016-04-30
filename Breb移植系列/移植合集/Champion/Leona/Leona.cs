@@ -68,32 +68,32 @@ namespace ElEasy.Plugins
 
         public void CreateMenu()
         {
-            rootMenu = MainMenu.AddMenu("ElLeona", "ElLeona");
+            rootMenu = MainMenu.AddMenu("El雷欧娜", "ElLeona");
 
             comboMenu = rootMenu.AddSubMenu("Combo", "Combo");
-            comboMenu.Add("ElEasy.Leona.Combo.Q", new CheckBox("Use Q"));
-            comboMenu.Add("ElEasy.Leona.Combo.W", new CheckBox("Use W"));
-            comboMenu.Add("ElEasy.Leona.Combo.E", new CheckBox("Use E"));
-            comboMenu.Add("ElEasy.Leona.Combo.R", new CheckBox("Use R", false));
-            comboMenu.Add("ElEasy.Leona.Combo.Count.Enemies", new Slider("Enemies in range for R", 2, 1, 5));
-            comboMenu.Add("ElEasy.Leona.Hitchance", new ComboBox("Hitchance", 3, "Low", "Medium", "High", "Very High"));
-            comboMenu.Add("ElEasy.Leona.Combo.Ignite", new CheckBox("Use Ignite"));
+            comboMenu.Add("ElEasy.Leona.Combo.Q", new CheckBox("使用 Q"));
+            comboMenu.Add("ElEasy.Leona.Combo.W", new CheckBox("使用 W"));
+            comboMenu.Add("ElEasy.Leona.Combo.E", new CheckBox("使用 E"));
+            comboMenu.Add("ElEasy.Leona.Combo.R", new CheckBox("使用 R", false));
+            comboMenu.Add("ElEasy.Leona.Combo.Count.Enemies", new Slider("R范围内敌人数量", 2, 1, 5));
+            comboMenu.Add("ElEasy.Leona.Hitchance", new ComboBox("命中率", 3, "低", "中", "高", "非常高" }, 3)));
+            comboMenu.Add("ElEasy.Leona.Combo.Ignite", new CheckBox("使用 点燃"));
 
-            harassMenu = rootMenu.AddSubMenu("Harass", "Harass");
-            harassMenu.Add("ElEasy.Leona.Harass.Q", new CheckBox("Use Q"));
-            harassMenu.Add("ElEasy.Leona.Harass.E", new CheckBox("Use E"));
-            harassMenu.Add("ElEasy.Leona.Harass.Player.Mana", new Slider("Minimum Mana", 55));
+            harassMenu = rootMenu.AddSubMenu("骚扰", "Harass");
+            harassMenu.Add("ElEasy.Leona.Harass.Q", new CheckBox("使用 Q"));
+            harassMenu.Add("ElEasy.Leona.Harass.E", new CheckBox("使用 E"));
+            harassMenu.Add("ElEasy.Leona.Harass.Player.Mana", new Slider("最低蓝量", 55));
 
-            settingsMenu = rootMenu.AddSubMenu("Settings", "Settings");
-            settingsMenu.Add("ElEasy.Leona.Interrupt.Activated", new CheckBox("Interrupt spells"));
-            settingsMenu.Add("ElEasy.Leona.GapCloser.Activated", new CheckBox("Anti gapcloser"));
+            settingsMenu = rootMenu.AddSubMenu("设置", "Settings");
+            settingsMenu.Add("ElEasy.Leona.Interrupt.Activated", new CheckBox("技能打断"));
+            settingsMenu.Add("ElEasy.Leona.GapCloser.Activated", new CheckBox("防突进"));
 
-            miscellaneousMenu = rootMenu.AddSubMenu("Miscellaneous", "Miscellaneous");
-            miscellaneousMenu.Add("ElEasy.Leona.Draw.off", new CheckBox("Turn drawings off"));
-            miscellaneousMenu.Add("ElEasy.Leona.Draw.Q", new CheckBox("Draw Q"));
-            miscellaneousMenu.Add("ElEasy.Leona.Draw.W", new CheckBox("Draw W"));
-            miscellaneousMenu.Add("ElEasy.Leona.Draw.E", new CheckBox("Draw E"));
-            miscellaneousMenu.Add("ElEasy.Leona.Draw.R", new CheckBox("Draw R"));
+            miscellaneousMenu = rootMenu.AddSubMenu("杂项", "Miscellaneous");
+            miscellaneousMenu.Add("ElEasy.Leona.Draw.off", new CheckBox("关闭线圈"));
+            miscellaneousMenu.Add("ElEasy.Leona.Draw.Q", new CheckBox("显示 Q"));
+            miscellaneousMenu.Add("ElEasy.Leona.Draw.W", new CheckBox("显示 W"));
+            miscellaneousMenu.Add("ElEasy.Leona.Draw.E", new CheckBox("显示 E"));
+            miscellaneousMenu.Add("ElEasy.Leona.Draw.R", new CheckBox("显示 R"));
         }
 
         public static bool getCheckBoxItem(Menu m, string item)
