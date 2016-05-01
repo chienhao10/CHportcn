@@ -47,18 +47,18 @@ namespace PortAIO.Utility
 
         public static void Menu()
         {
-            Miscc = MainMenu.AddMenu("移植合集 杂项", "berbsicmisc");
+            Miscc = MainMenu.AddMenu("CH汉化控制台", "berbsicmisc");
 
-            Miscc.AddGroupLabel("英雄更改");
+            Miscc.AddGroupLabel("英雄脚本切换");
             if (Champion.Contains(ObjectManager.Player.ChampionName))
             {
                 if (Player.ChampionName.Equals(Champion[0]))
                 {
-                    Miscc.Add("soraka", new ComboBox("切换 索拉卡脚本 : ", 0, "Sophie Soraka", "ChallengerSeries"));
+                    Miscc.Add("soraka", new ComboBox("切换 索拉卡脚本 : ", 0, "Sophie 索拉卡", "挑战者系列"));
                 }
                 if (Player.ChampionName.Equals(Champion[1]))
                 {
-                    Miscc.Add("kogmaw", new ComboBox("切换 大嘴脚本 : ", 0, "Sharpshooter", "ChallengerSeries"));
+                    Miscc.Add("kogmaw", new ComboBox("切换 大嘴脚本 : ", 0, "神射手", "挑战者系列"));
                 }
                 if (Player.ChampionName.Equals(Champion[2]))
                 {
@@ -66,7 +66,7 @@ namespace PortAIO.Utility
                 }
                 if (Player.ChampionName.Equals(Champion[3]))
                 {
-                    Miscc.Add("kalista", new ComboBox("切换 滑板鞋脚本 : ", 0, "iKalista", "iKalista - Reborn"));
+                    Miscc.Add("kalista", new ComboBox("切换 滑板鞋脚本 : ", 0, "i滑板鞋", "i滑板鞋 - 重生"));
                 }
             }
             else
@@ -85,7 +85,7 @@ namespace PortAIO.Utility
             Miscc.AddSeparator();
             Miscc.Add("skin", new CheckBox("载入 换肤?"));
             //Miscc.Add("evade", new CheckBox("Enable Evade?", false));
-            Miscc.Add("godTracker", new CheckBox("载入 野区计时?", false));
+            Miscc.Add("godTracker", new CheckBox("载入 野区计时（El活化剂中有?", false));
             Miscc.AddSeparator();
             Miscc.Add("ping", new CheckBox("载入 信号管理器（玩家信号）?", false));
             Miscc.Add("human", new CheckBox("载入 人性化?", false));
