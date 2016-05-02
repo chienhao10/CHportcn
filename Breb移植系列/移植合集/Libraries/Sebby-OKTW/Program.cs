@@ -89,29 +89,29 @@ namespace SebbyLib
             W = new Spell(SpellSlot.W);
             R = new Spell(SpellSlot.R);
 
-            Config = MainMenu.AddMenu("OneKeyToWin AIO", "OneKeyToWin_AIO" + ObjectManager.Player.ChampionName);
+            Config = MainMenu.AddMenu("OKTW合集", "OneKeyToWin_AIO" + ObjectManager.Player.ChampionName);
 
             #region MENU ABOUT OKTW
 
-            Config.Add("debug", new CheckBox("Debug", false));
-            Config.Add("debugChat", new CheckBox("Debug Chat", false));
-            Config.Add("print", new CheckBox("OKTW NEWS in chat"));
+            Config.Add("debug", new CheckBox("调试", false));
+            Config.Add("debugChat", new CheckBox("调试信息", false));
+            Config.Add("print", new CheckBox("显示OKTW更新内容"));
 
             #endregion
 
-            Config.Add("AIOmode", new Slider("AIO mode (0 : Util & Champ | 1 : Only Champ | 2 : Only Util)", 0, 0, 2));
+            Config.Add("AIOmode", new Slider("全局模式 (0 : 功能集 + 英雄插件 | 1 : 英雄插件 | 2 : 功能集)", 0, 0, 2));
             AIOmode = getSliderItem("AIOmode");
 
-            Config.Add("PredictionMODE", new Slider("Prediction MODE (0 : Common Pred | 1 : OKTW© PREDICTION)", 0, 0, 1));
-            Config.Add("HitChance", new Slider("AIO mode (0 : Very High | 1 : High | 2 : Medium)", 0, 0, 2));
-            Config.Add("debugPred", new CheckBox("Draw Aiming OKTW© PREDICTION", false));
+            Config.Add("PredictionMODE", new Slider("预判模式 (0 : 基本库预判 | 1 : OKTW© 预判", 0, 0, 1));
+            Config.Add("HitChance", new Slider("命中率 (0 : 非常高 | 1 : 高 | 2 : 中)", 0, 0, 2));
+            Config.Add("debugPred", new CheckBox("显示OKTW©预判线", false));
 
             if (AIOmode != 2)
             {
-                Config.Add("supportMode", new CheckBox("Support Mode", false));
-                Config.Add("comboDisableMode", new CheckBox("Disable auto-attack in combo mode", false));
-                Config.Add("manaDisable", new CheckBox("Disable mana manager in combo"));
-                Config.Add("collAA", new CheckBox("Disable auto-attack if Yasuo wall collision"));
+                Config.Add("supportMode", new CheckBox("辅助模式", false));
+                Config.Add("comboDisableMode", new CheckBox("连招屏蔽普攻", false));
+                Config.Add("manaDisable", new CheckBox("连招屏蔽蓝量控制"));
+                Config.Add("collAA", new CheckBox("面对伢所风墙屏蔽普攻"));
 
                 #region LOAD CHAMPIONS
 
