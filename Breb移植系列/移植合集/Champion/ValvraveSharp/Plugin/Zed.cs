@@ -391,7 +391,7 @@
             var pred = Q.GetPrediction(target, true, -1, LeagueSharp.SDK.CollisionableObjects.YasuoWall);
             if (pred.Hitchance >= Q.MinHitChance)
             {
-                Q.Cast(pred.CastPosition);
+                Q.Cast(target);
             }
             else
             {
@@ -408,7 +408,7 @@
                 }
                 if (predShadow != null && predShadow.Hitchance >= Q.MinHitChance)
                 {
-                    Q2.Cast(pred.CastPosition);
+                    Q2.Cast(target);
                 }
                 else if (RShadowCanQ)
                 {
@@ -416,7 +416,7 @@
                     predShadow = Q2.GetPrediction(target, true, -1, LeagueSharp.SDK.CollisionableObjects.YasuoWall);
                     if (predShadow.Hitchance >= Q.MinHitChance)
                     {
-                        Q.Cast(predShadow.CastPosition);
+                        Q.Cast(target);
                     }
                 }
             }
@@ -432,12 +432,14 @@
             var col = pred.GetCollision(LeagueSharp.SDK.CollisionableObjects.Heroes | LeagueSharp.SDK.CollisionableObjects.Minions);
             if (col.Count == 0)
             {
-                return Q.Cast(pred.CastPosition);
+                Q.Cast(target);
+                return true;
             }
             var subDmg = Q.GetDamage(target, DamageStage.SecondForm);
             if (target is AIHeroClient && target.Health + target.AttackShield <= subDmg)
             {
-                return Q.Cast(pred.CastPosition);
+                Q.Cast(target);
+                return true;
             }
             return target is Obj_AI_Minion && spell.CanLastHit(target, subDmg) && Q.Cast(pred.CastPosition);
         }

@@ -236,9 +236,7 @@ namespace Elvarus
                                 true);
                         if (distance < spells[Spells.Q].RangeSqr)
                         {
-                            if (spells[Spells.Q].Cast(prediction.CastPosition))
-                            {
-                            }
+                            spells[Spells.Q].Cast(target);
                         }
                     }
                 }

@@ -146,26 +146,34 @@ namespace Challenger_Series.Plugins
             }
 
             #region Humanizer
-            if (_humanizer != null)
+            if (getCheckBoxItem(HumanizerMenu, "koggiehumanizerenabled"))
             {
-                _attacksSoFar = 0;
+                if (_humanizer != null)
+                {
+                    _attacksSoFar = 0;
+                }
+                else if (_attacksSoFar >= getSliderItem(HumanizerMenu, "koggieminattacks"))
+                {
+                    _humanizer = new Humanizer(getSliderItem(HumanizerMenu, "koggiehumanizermovetime"));
+                }
+                if (!IsWActive())
+                {
+                    _humanizer = null;
+                    _attacksSoFar = 0;
+                }
+                if (_humanizer != null && _humanizer.ShouldDestroy)
+                {
+                    _humanizer = null;
+                }
+                Orbwalker.DisableAttacking = CanMove();
+                Orbwalker.DisableMovement = CanAttack();
             }
-            else if (_attacksSoFar >= getSliderItem(HumanizerMenu, "koggieminattacks"))
-            {
-                _humanizer = new Humanizer(getSliderItem(HumanizerMenu, "koggiehumanizermovetime"));
-            }
-            if (!IsWActive())
+            else
             {
                 _humanizer = null;
-                _attacksSoFar = 0;
+                Orbwalker.DisableAttacking = false;
+                Orbwalker.DisableMovement = false;
             }
-            if (_humanizer != null && _humanizer.ShouldDestroy)
-            {
-                _humanizer = null;
-            }
-
-            Orbwalker.DisableAttacking = !CanMove();
-            Orbwalker.DisableMovement = !CanAttack();
             #endregion Humanizer
         }
 
@@ -186,25 +194,25 @@ namespace Challenger_Series.Plugins
 
         private bool CanAttack()
         {
-            if (!getCheckBoxItem(HumanizerMenu, "koggiehumanizerenabled")) return true;
+            if (!getCheckBoxItem(HumanizerMenu, "koggiehumanizerenabled")) return false;
             if (IsWActive())
             {
                 return _humanizer == null;
             }
-            return true;
+            return false;
         }
         private bool CanMove()
         {
-            if (!getCheckBoxItem(HumanizerMenu, "koggiehumanizerenabled")) return true;
+            if (!getCheckBoxItem(HumanizerMenu, "koggiehumanizerenabled")) return false;
             if (IsWActive() && ObjectManager.Player.AttackSpeedMod / 2 > _rand.Next(167, 230) / 100)
             {
                 if ((Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && ObjectManager.Player.CountEnemyHeroesInRange(GetAttackRangeAfterWIsApplied() - 25) < 1) || (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && (!GameObjects.EnemyMinions.Any(m => m.IsHPBarRendered && m.Distance(ObjectManager.Player) < GetAttackRangeAfterWIsApplied() - 25) && !GameObjects.Jungle.Any(m => m.IsHPBarRendered && m.Distance(ObjectManager.Player) < GetAttackRangeAfterWIsApplied() - 25))))
                 {
-                    return true;
+                    return false;
                 }
                 return _humanizer != null;
             }
-            return true;
+            return false;
         }
 
         #endregion Events
@@ -251,7 +259,7 @@ namespace Challenger_Series.Plugins
             MainMenu.Add("koggiermaxstacks", new Slider("R 最高叠加: ", 2, 0, 11));
             MainMenu.Add("koggiesavewmana", new CheckBox("总是为 W 保留蓝!", true));
         }
-
+        
         #region ChampionLogic
 
         private void QLogic(AIHeroClient target)
@@ -288,10 +296,13 @@ namespace Challenger_Series.Plugins
             if (!getCheckBoxItem(ComboMenu, "koggieuser") || !R.IsReady() || ObjectManager.Player.IsRecalling() || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None)) return;
             if (getCheckBoxItem(MainMenu, "koggiesavewmana") && ObjectManager.Player.Mana < GetRMana() + GetWMana()) return;
             var myPos = ObjectManager.Player.ServerPosition;
-            foreach (
-                var enemy in
-                    ValidTargets.Where(h => h.Distance(myPos) < R.Range && (!IsWActive() || h.Distance(myPos) > W.Range + 85) && h.HealthPercent < 25 && h.LSIsValidTarget()))
+            foreach (var enemy in ValidTargets.Where(h => h.Distance(myPos) < R.Range && (!IsWActive() || h.Distance(myPos) > W.Range + 85) && h.HealthPercent < 25 && h.LSIsValidTarget()))
             {
+                if (getCheckBoxItem(ComboMenu, "onlyRHP"))
+                {
+                    if (enemy.HealthPercent > getSliderItem(ComboMenu, "hpOfTarget"))
+                        return;
+                }
                 var prediction = R.GetPrediction(enemy, true);
                 if ((int)prediction.Hitchance > (int)HitChance.Medium)
                 {

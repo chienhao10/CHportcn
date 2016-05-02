@@ -352,8 +352,7 @@
             var predA = Q.GetPrediction(target, false, -1, LeagueSharp.SDK.CollisionableObjects.YasuoWall);
             var colA = predA.GetCollision();
 
-            var col = pred.CollisionObjects.ToList();
-            if (col.Count == 0 || (getCheckBoxItem(comboMenu, "QCol") && Common.CastSmiteKillCollision(colA)))
+            if (colA.Count == 0 || (getCheckBoxItem(comboMenu, "QCol") && Common.CastSmiteKillCollision(colA)))
             {
                 QELO.Cast(target);
             }

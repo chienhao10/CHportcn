@@ -775,7 +775,7 @@
             }
             if (getCheckBoxItem(lcMenu, "E") && E.IsReady())
             {
-                var minions = EntityManager.MinionsAndMonsters.EnemyMinions.Where(i => i.IsMinion() || i.IsPet(false)).Concat(EntityManager.MinionsAndMonsters.Monsters).Where(i => i.IsValidTarget(E.Range) && !HaveE(i) && (!GetPosAfterDash(i).IsUnderEnemyTurret() || getCheckBoxItem(lcMenu, "ETower"))&& Evade.IsSafePoint(GetPosAfterDash(i).ToVector2()).IsSafe).OrderByDescending(i => i.MaxHealth).ToList();
+                var minions = EntityManager.MinionsAndMonsters.EnemyMinions.Where(i => i.IsMinion() || i.IsPet(false)).Concat(EntityManager.MinionsAndMonsters.Monsters).Where(i => i.IsValidTarget(E.Range) && !HaveE(i) && (!GetPosAfterDash(i).IsUnderEnemyTurret() || getCheckBoxItem(lcMenu, "ETower")) && Evade.IsSafePoint(GetPosAfterDash(i).ToVector2()).IsSafe).OrderByDescending(i => i.MaxHealth).ToList();
                 if (minions.Count > 0)
                 {
                     var minion = minions.FirstOrDefault(i => E.CanLastHit(i, GetEDmg(i)));
@@ -891,7 +891,7 @@
             }
             if (getCheckBoxItem(lhMenu, "Q") && E.IsReady() && !Orbwalker.IsAutoAttacking)
             {
-                var minion = EntityManager.MinionsAndMonsters.EnemyMinions.Where(i => 
+                var minion = EntityManager.MinionsAndMonsters.EnemyMinions.Where(i =>
                 (i.IsMinion() || i.IsPet(false)) &&
                 i.IsValidTarget(E.Range) &&
                 !HaveE(i) &&
@@ -982,13 +982,10 @@
                 LastHit();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee) || getKeyBindItem(fleeMenu, "E"))
             {
-                if (getKeyBindItem(fleeMenu, "E"))
-                {
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
-                    Flee();
-                }
+                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Flee();
             }
 
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))

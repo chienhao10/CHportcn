@@ -156,14 +156,12 @@ namespace OneKeyToWin_AIO_Sebby.Core
                     //W.Cast();
                     //}
 
-                    if (Program.Combo && PPDistance < 900 && Player.ChampionName == "Karhus" && Q.IsReady() &&
-                        Player.CountEnemiesInRange(900) == 0)
+                    if (Program.Combo && PPDistance < 900 && Player.ChampionName == "Karthus" && Q.IsReady() && Player.CountEnemiesInRange(900) == 0)
                     {
                         Q.Cast(need.PredictedPos);
                     }
 
-                    if (Program.Combo && PPDistance < 1400 && Player.ChampionName == "Ashe" && E.IsReady() &&
-                        Player.CountEnemiesInRange(800) == 0 && PortAIO.Champion.Ashe.Program.getAutoE())
+                    if (Program.Combo && PPDistance < 1400 && Player.ChampionName == "Ashe" && E.IsReady() && Player.CountEnemiesInRange(800) == 0 && PortAIO.Champion.Ashe.Program.getAutoE())
                     {
                         E.Cast(Player.Position.Extend(need.PredictedPos, 5000));
                     }

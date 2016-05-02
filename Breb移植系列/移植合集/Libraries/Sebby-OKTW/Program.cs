@@ -102,14 +102,6 @@ namespace SebbyLib
             Config.Add("AIOmode", new Slider("AIO mode (0 : Util & Champ | 1 : Only Champ | 2 : Only Util)", 0, 0, 2));
             AIOmode = getSliderItem("AIOmode");
 
-            if (AIOmode != 2)
-            {
-                if (Player.ChampionName != "MissFortune")
-                {
-                    new OktwTs().LoadOKTW();
-                }
-            }
-
             Config.Add("PredictionMODE", new Slider("Prediction MODE (0 : Common Pred | 1 : OKTW© PREDICTION)", 0, 0, 1));
             Config.Add("HitChance", new Slider("AIO mode (0 : Very High | 1 : High | 2 : Medium)", 0, 0, 2));
             Config.Add("debugPred", new CheckBox("Draw Aiming OKTW© PREDICTION", false));
@@ -213,6 +205,12 @@ namespace SebbyLib
             {
                 if (hero.IsAlly && hero.Team == Player.Team)
                     Allies.Add(hero);
+            }
+
+            if (AIOmode != 1)
+            {
+                new OKTWward().LoadOKTW();
+                new OKTWtracker().LoadOKTW();
             }
 
             Game.OnUpdate += OnUpdate;

@@ -147,7 +147,7 @@ namespace Viktor
 
                     if (EPred.Hitchance >= LeagueSharp.Common.HitChance.High)
                     {
-                        E.Cast(e.ServerPosition, EPred.CastPosition);
+                        E.Cast(e.ServerPosition, e.ServerPosition);
                     }
                 }
                 else if (ObjectManager.Player.ServerPosition.Distance(e.ServerPosition) < 1200)
@@ -157,7 +157,7 @@ namespace Viktor
 
                     if (EPre.Hitchance >= LeagueSharp.Common.HitChance.High)
                     {
-                        E.Cast(star, EPre.CastPosition);
+                        E.Cast(star, e.ServerPosition);
                     }
                 }
             }
