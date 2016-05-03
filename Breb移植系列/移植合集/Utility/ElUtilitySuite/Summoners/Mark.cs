@@ -84,11 +84,11 @@
                 return;
             }
 
-            snowballMenu = rootMenu.AddSubMenu("大乱斗雪球", "Snowball");
-            snowballMenu.Add("Snowball.Activated", new CheckBox("开启雪球"));
+            snowballMenu = rootMenu.AddSubMenu("ARAM Snowball", "Snowball");
+            snowballMenu.Add("Snowball.Activated", new CheckBox("Snowball activated"));
             foreach (var x in ObjectManager.Get<AIHeroClient>().Where(x => x.IsEnemy))
             {
-                snowballMenu.Add("snowballon" + x.ChampionName, new CheckBox("使用在 " + x.ChampionName));
+                snowballMenu.Add("snowballon" + x.ChampionName, new CheckBox("Use for " + x.ChampionName));
             }
         }
 

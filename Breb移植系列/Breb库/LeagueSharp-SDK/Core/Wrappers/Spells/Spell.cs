@@ -784,7 +784,7 @@ namespace LeagueSharp.SDK
         /// </returns>
         public float GetDamage(Obj_AI_Base target, DamageStage stage = DamageStage.Default)
         {
-            return (float)GameObjects.Player.GetSpellDamage(target, this.Slot, stage);
+            return (float)GameObjects.Player.LSGetSpellDamage(target, this.Slot, stage);
         }
 
         /// <summary>

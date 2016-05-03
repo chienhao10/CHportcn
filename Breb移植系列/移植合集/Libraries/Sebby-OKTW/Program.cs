@@ -15,6 +15,7 @@ using HitChance = SebbyLib.Prediction.HitChance;
 using PredictionInput = SebbyLib.Prediction.PredictionInput;
 using PredictionOutput = SebbyLib.Prediction.PredictionOutput;
 using Spell = LeagueSharp.Common.Spell;
+using SPrediction;
 
 namespace SebbyLib
 {
@@ -80,7 +81,7 @@ namespace SebbyLib
         {
             return Config[item].Cast<KeyBind>().CurrentValue;
         }
-
+        public static bool SPredictionLoad;
         public static void GameOnOnGameLoad()
         {
             enemySpawn = ObjectManager.Get<Obj_SpawnPoint>().FirstOrDefault(x => x.IsEnemy);
@@ -89,29 +90,39 @@ namespace SebbyLib
             W = new Spell(SpellSlot.W);
             R = new Spell(SpellSlot.R);
 
-            Config = MainMenu.AddMenu("OKTW合集", "OneKeyToWin_AIO" + ObjectManager.Player.ChampionName);
+            Config = MainMenu.AddMenu("OneKeyToWin AIO", "OneKeyToWin_AIO" + ObjectManager.Player.ChampionName);
 
             #region MENU ABOUT OKTW
 
             Config.Add("debug", new CheckBox("调试", false));
             Config.Add("debugChat", new CheckBox("调试信息", false));
-            Config.Add("print", new CheckBox("显示OKTW更新内容"));
+            Config.Add("print", new CheckBox("OKTW更新信息"));
 
             #endregion
 
-            Config.Add("AIOmode", new Slider("全局模式 (0 : 功能集 + 英雄插件 | 1 : 英雄插件 | 2 : 功能集)", 0, 0, 2));
+            Config.Add("AIOmode", new Slider("AIO 模式 (0 : 功能集 & 英雄 | 1 : 只载入英雄 | 2 : 只载入功能集)", 0, 0, 2));
             AIOmode = getSliderItem("AIOmode");
 
-            Config.Add("PredictionMODE", new Slider("预判模式 (0 : 基本库预判 | 1 : OKTW© 预判", 0, 0, 1));
-            Config.Add("HitChance", new Slider("命中率 (0 : 非常高 | 1 : 高 | 2 : 中)", 0, 0, 2));
-            Config.Add("debugPred", new CheckBox("显示OKTW©预判线", false));
+            Config.Add("PredictionMODE", new Slider("预判模式 (0 : 库预判 | 1 : OKTW© 预判 | 2 : S预判)", 0, 0, 2));
+            Config.Add("HitChance", new Slider("AIO 模式 (0 : 非常高 | 1 : 高 | 2 : 中)", 0, 0, 2));
+            Config.Add("debugPred", new CheckBox("显示 瞄准OKTW©预判", false));
+
+            if (getSliderItem("PredictionMODE") == 2)
+            {
+                SPrediction.Prediction.Initialize(Config);
+                SPredictionLoad = true;
+            }
+            else
+            {
+                Config.AddLabel("SPREDICTION NOT LOADED");
+            }
 
             if (AIOmode != 2)
             {
                 Config.Add("supportMode", new CheckBox("辅助模式", false));
                 Config.Add("comboDisableMode", new CheckBox("连招屏蔽普攻", false));
-                Config.Add("manaDisable", new CheckBox("连招屏蔽蓝量控制"));
-                Config.Add("collAA", new CheckBox("面对伢所风墙屏蔽普攻"));
+                Config.Add("manaDisable", new CheckBox("连招时无视蓝量控制器"));
+                Config.Add("collAA", new CheckBox("面对亚索风墙停止普攻"));
 
                 #region LOAD CHAMPIONS
 
@@ -371,6 +382,30 @@ namespace SebbyLib
                 else if (getSliderItem("HitChance") == 2)
                 {
                     QWER.CastIfHitchanceEquals(target, LeagueSharp.Common.HitChance.Medium);
+                }
+            }
+
+            if (getSliderItem("PredictionMODE") == 2)
+            {
+                if (target is AIHeroClient && target.IsValid)
+                {
+                    var t = target as AIHeroClient;
+                    if (getSliderItem("HitChance") == 0)
+                    {
+                        QWER.SPredictionCast(t, LeagueSharp.Common.HitChance.VeryHigh);
+                    }
+                    else if (getSliderItem("HitChance") == 1)
+                    {
+                        QWER.SPredictionCast(t, LeagueSharp.Common.HitChance.High);
+                    }
+                    else if (getSliderItem("HitChance") == 2)
+                    {
+                        QWER.SPredictionCast(t, LeagueSharp.Common.HitChance.Medium);
+                    }
+                }
+                else
+                {
+                    QWER.CastIfHitchanceEquals(target, LeagueSharp.Common.HitChance.High);
                 }
             }
         }

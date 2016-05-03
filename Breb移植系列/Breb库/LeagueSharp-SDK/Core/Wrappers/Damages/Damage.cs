@@ -286,7 +286,7 @@ namespace LeagueSharp.SDK
         /// <returns>
         ///     The <see cref="double" /> value of damage.
         /// </returns>
-        public static double GetSpellDamage(
+        public static double LSGetSpellDamage(
             this AIHeroClient source,
             Obj_AI_Base target,
             SpellSlot spellSlot,

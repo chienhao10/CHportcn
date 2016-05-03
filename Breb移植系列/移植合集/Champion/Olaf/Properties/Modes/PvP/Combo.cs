@@ -40,7 +40,7 @@ namespace ExorAIO.Champions.Olaf
             if (Variables.Q.IsReady() && !Targets.Target.HasBuffOfType(BuffType.Slow) && Targets.Target.IsValidTarget(Variables.Q.Range) && Variables.getCheckBoxItem(Variables.QMenu, "qspell.combo"))
             {
                 var castPosition = Targets.Target.Position.Extend(ObjectManager.Player.Position, -100);
-                var castPosition2 = Targets.Target.Position.Extend(ObjectManager.Player.Position, -50);
+                var castPosition2 = Targets.Target.Position.Extend(ObjectManager.Player.Position, -70);
 
                 if (ObjectManager.Player.LSDistance(Targets.Target.ServerPosition) >= 300)
                 {

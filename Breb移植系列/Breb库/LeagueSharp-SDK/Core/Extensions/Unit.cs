@@ -385,7 +385,7 @@ namespace LeagueSharp.SDK
         /// <param name="source">Extended source</param>
         /// <param name="target">The Target</param>
         /// <returns>Returns if the source is facing the target (boolean)</returns>
-        public static bool IsFacing(this Obj_AI_Base source, Obj_AI_Base target)
+        public static bool LSIsFacing(this Obj_AI_Base source, Obj_AI_Base target)
         {
             return (source.IsValid() && target.IsValid())
                    && source.Direction.AngleBetween(target.Position - source.Position) < 90;

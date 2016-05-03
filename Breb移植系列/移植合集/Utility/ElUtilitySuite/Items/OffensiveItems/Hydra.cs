@@ -59,8 +59,8 @@ namespace ElUtilitySuite.Items.OffensiveItems
 
         public override void CreateMenu()
         {
-            Menu.AddGroupLabel("九头蛇");
-            Menu.Add("Hydracombo", new CheckBox("连招使用"));
+            Menu.AddGroupLabel("Ravenous Hydra");
+            Menu.Add("Hydracombo", new CheckBox("Use on Combo"));
         }
 
         /// <summary>

@@ -33,6 +33,8 @@ namespace PortAIO.Utility
         public static bool bubba { get { return Miscc["bubba"].Cast<CheckBox>().CurrentValue; } }
         public static int kalista { get { return Miscc["kalista"].Cast<ComboBox>().CurrentValue; } }
         public static bool gank { get { return Miscc["gank"].Cast<CheckBox>().CurrentValue; } }
+        public static int diana { get { return Miscc["diana"].Cast<ComboBox>().CurrentValue; } }
+        public static int cait { get { return Miscc["cait"].Cast<ComboBox>().CurrentValue; } }
 
         public static Menu Miscc;
 
@@ -43,7 +45,7 @@ namespace PortAIO.Utility
 
         public static List<string> RandomUltChampsList = new List<string>(new[] { "Ezreal", "Jinx", "Ashe", "Draven", "Gangplank", "Ziggs", "Lux", "Xerath" });
         public static List<string> BaseUltList = new List<string>(new[] { "Jinx", "Ashe", "Draven", "Ezreal", "Karthus"});
-        public static List<string> Champion = new List<string>(new[] { "Soraka", "KogMaw", "LeeSin", "Kalista" });
+        public static List<string> Champion = new List<string>(new[] { "Soraka", "KogMaw", "LeeSin", "Kalista", "Diana", "Caitlyn" });
 
         public static void Menu()
         {
@@ -62,11 +64,19 @@ namespace PortAIO.Utility
                 }
                 if (Player.ChampionName.Equals(Champion[2]))
                 {
-                    //Miscc.Add("bubba", new CheckBox("Enable Bubba Kush (WreckingBall)?"));
+                    Miscc.Add("leesin", new ComboBox("切换 李星脚本 : ", 0, "ValvraveSharp", "El李星 : 重生"));
                 }
                 if (Player.ChampionName.Equals(Champion[3]))
                 {
                     Miscc.Add("kalista", new ComboBox("切换 滑板鞋脚本 : ", 0, "i滑板鞋", "i滑板鞋 - 重生"));
+                }
+                if (Player.ChampionName.Equals(Champion[4]))
+                {
+                    Miscc.Add("diana", new ComboBox("切换 皎月脚本 : ", 0, "El皎月", "Nechrito 皎月"));
+                }
+                if (Player.ChampionName.Equals(Champion[5]))
+                {
+                    Miscc.Add("cait", new ComboBox("切换 女警脚本 : ", 0, "OKTW", "Exor系列 : AIO"));
                 }
             }
             else

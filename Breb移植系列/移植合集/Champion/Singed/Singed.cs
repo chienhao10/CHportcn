@@ -126,7 +126,7 @@ namespace ElSinged
 
         private static void Combo()
         {
-            if (Player.CountEnemiesInRange(getSliderItem(miscMenu, "ElSinged.Misc.QRange")) < 1 && spells[Spells.Q].Instance.ToggleState == 2)
+            if (Player.CountEnemiesInRange(getSliderItem(miscMenu, "ElSinged.Misc.QRange")) < 1 && spells[Spells.Q].Instance.ToggleState == 2 && !getCheckBoxItem(miscMenu, "DontOffQ"))
             {
                 spells[Spells.Q].Cast();
             }
@@ -176,7 +176,7 @@ namespace ElSinged
 
         private static void Harass()
         {
-            if (Player.CountEnemiesInRange(getSliderItem(miscMenu, "ElSinged.Misc.QRange")) < 1 && spells[Spells.Q].Instance.ToggleState == 2)
+            if (Player.CountEnemiesInRange(getSliderItem(miscMenu, "ElSinged.Misc.QRange")) < 1 && spells[Spells.Q].Instance.ToggleState == 2 && !getCheckBoxItem(miscMenu, "DontOffQ"))
             {
                 spells[Spells.Q].Cast();
             }
@@ -241,7 +241,7 @@ namespace ElSinged
                 return;
             }
 
-            if (MinionManager.GetMinions(ObjectManager.Player.Position, 400).Count < 1 && spells[Spells.Q].Instance.ToggleState == 2)
+            if (MinionManager.GetMinions(ObjectManager.Player.Position, 400).Count < 1 && spells[Spells.Q].Instance.ToggleState == 2 && !getCheckBoxItem(miscMenu, "DontOffQ"))
             {
                 spells[Spells.Q].Cast();
             }
@@ -284,7 +284,7 @@ namespace ElSinged
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) && !!getCheckBoxItem(miscMenu, "DontOffQ"))
             {
                 TurnOffQ();
             }

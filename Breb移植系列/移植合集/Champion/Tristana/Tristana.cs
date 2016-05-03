@@ -314,7 +314,7 @@ namespace ElTristana
                             for (var i = 0; 4 > i; i++)
                             {
                                 Drawing.DrawLine(x + i * 20, y, x + i * 20 + 10, y, 10,
-                                    i > stacks ? Color.DarkGray : Color.DeepSkyBlue);
+                                    i > stacks ? Color.DarkGray : Color.OrangeRed);
                             }
                         }
 
@@ -342,7 +342,11 @@ namespace ElTristana
 
                                             if (spells[Spells.W].GetDamage(target) > target.Health + 15)
                                             {
-                                                spells[Spells.W].Cast(target.ServerPosition);
+                                                var prediction = spells[Spells.W].GetPrediction(target);
+                                                if (prediction.Hitchance >= HitChance.High)
+                                                {
+                                                    spells[Spells.W].Cast(prediction.CastPosition);
+                                                }
                                             }
                                         }
                                     }

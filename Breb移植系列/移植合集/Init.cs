@@ -6,6 +6,9 @@ using EloBuddy;
 using EloBuddy.SDK.Events;
 using ExorAIO.Core;
 using PortAIO.Utility;
+using LeagueSharp.Common;
+using SharpDX;
+using PortAIO.Properties;
 // ReSharper disable ObjectCreationAsStatement
 
 #endregion
@@ -19,12 +22,29 @@ namespace PortAIO
             Loading.OnLoadingComplete += Initialize;
         }
 
+        private static Render.Sprite Intro;
+        private static float IntroTimer = Game.Time;
         public static SCommon.PluginBase.Champion Champion;
         public static List<string> RandomUltChampsList = new List<string>(new[] { "Ezreal", "Jinx", "Ashe", "Draven", "Gangplank", "Ziggs", "Lux", "Xerath" });
         public static List<string> BaseUltList = new List<string>(new[] { "Jinx", "Ashe", "Draven", "Ezreal", "Karthus" });
 
+        private static System.Drawing.Bitmap LoadImg(string imgName)
+        {
+            var bitmap = Resources.ResourceManager.GetObject(imgName) as System.Drawing.Bitmap;
+            if (bitmap == null)
+            {
+                Console.WriteLine(imgName + ".png not found.");
+            }
+            return bitmap;
+        }
+
         private static void Initialize(EventArgs args)
         {
+            Intro = new Render.Sprite(LoadImg("PortLogo"), new Vector2((Drawing.Width / 2) - 175, (Drawing.Height / 2) - 300));
+            Intro.Add(0);
+            Intro.OnDraw();
+            LeagueSharp.Common.Utility.DelayAction.Add(5000, () => Intro.Remove());
+
             Loader.Menu();
 
             if (!Loader.champOnly)
@@ -115,12 +135,26 @@ namespace PortAIO
                     case "amumu": // Shine#
                         PortAIO.Champion.Amumu.Program.OnLoad();
                         break;
+                    case "caitlyn":
+                        switch (Loader.cait)
+                        {
+                            case 0:
+                                SebbyLib.Program.GameOnOnGameLoad();
+                                break;
+                            case 1:
+                                Bootstrap.BuildMenu();
+                                Bootstrap.LoadChampion();
+                                break;
+                            default:
+                                SebbyLib.Program.GameOnOnGameLoad();
+                                break;
+                        }
+                        break;
                     case "anivia": // OKTW - Sebby - All Seeby champs go down here
                     case "thresh":
                     case "annie":
                     case "ashe": // Or (Challenger Series Ashe)
                     case "braum":
-                    case "caitlyn":
                     case "ekko":
                     case "ezreal":
                     case "graves":
@@ -173,8 +207,19 @@ namespace PortAIO
                         Bootstrap.BuildMenu();
                         Bootstrap.LoadChampion();
                         break;
-                    case "diana": // El Diana
-                        ElDiana.Diana.OnLoad();
+                    case "diana":
+                        switch (Loader.diana)
+                        {
+                            case 0:
+                                ElDiana.Diana.OnLoad();
+                                break;
+                            case 1:
+                                Nechrito_Diana.Program.Game_OnGameLoad();
+                                break;
+                            default:
+                                ElDiana.Diana.OnLoad();
+                                break;
+                        }
                         break;
                     case "drmundo": // Hestia's Mundo
                         Mundo.Mundo.OnLoad();
@@ -244,6 +289,9 @@ namespace PortAIO
                                 break;
                             case 1:
                                 new iKalistaReborn.Kalista();
+                                break;
+                            case 2:
+                                Challenger_Series.Program.Main();
                                 break;
                             default:
                                 new iKalistaReborn.Kalista();

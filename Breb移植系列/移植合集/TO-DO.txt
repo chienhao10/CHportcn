@@ -3,19 +3,16 @@
 ------------------------------------------------------------------------
 
 To-Check :
-- Maybe sure to port in Exory's AIO when fully ported to L# SDK.
+- Make sure to port in Exory's AIO when fully ported to L# SDK.
 
 ------------------------------------------------------------------------
 
 Port [Will Port One at a time when I'm bored or there's nothing on the to-do] :
-- Nechrito Diana
-- Challenger Series Kalista/Lucian/Ashe
-- Hoola Riven
+- Nechrito Twitch/Nidalee (When it comes out)
+- Challenger Series Lucian/Ashe
 - iLucian
 - Vayne Hunter Reborn
-- OTWK Quinn
 - Hoe's Jayce
-- NechritoTwitch
 - YasuoPro
 - e.Motion Katarina
 - ElXerath
@@ -24,15 +21,14 @@ Port [Will Port One at a time when I'm bored or there's nothing on the to-do] :
 - iDzEzreal
 - The Cheater
 - AIOCaster
-- OKTW Brand/Blitzcrank/Corki/Darius/Evelynn/Jhin/Kindred/Kog'Maw/Lux/Morg
+- OKTW Brand/Blitzcrank/Corki/Darius/Evelynn/Jhin/Kindred/Kog'Maw/Lux/Morg/Quinn
 - SkyLv Tristana/AurelionSol (These are harder because the menu is so damn large)
 - NoobJaxReloaded
-- Corki Diabath
-- Graves Diabath
+- Corki/Graves Diabath
 - BadaoKingdom Poppy/GP
 - STahmKench
 - DRengar/Elise/J4
-- ExorCaitlyn/Anivia/Ashe/Mundo/Graves/Jax/Jhin/Jax/Quinn/Sivir
+- ExorAnivia/Ashe/Mundo/Graves/Jax/Jhin/Jax/Quinn/Sivir
 - Kurisu's Blitzcrank
 - FreshBooster Braum
 - Nocturne is Back https://github.com/xQxCPMxQx/LeagueSharp2/tree/master/Nocturne

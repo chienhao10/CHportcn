@@ -20,19 +20,19 @@ namespace OneKeyToWin_AIO_Sebby.Core
         {
             DashSpell = qwer;
 
-            Sub = Config.AddSubMenu(qwer.Slot + " Dash Config");
-            Sub.Add("DashMode", new Slider("Dash MODE (0 : Cursor | 1 : Side | 2 : Safe Pos)", 2, 0, 2));
-            Sub.Add("EnemyCheck", new Slider("Block dash in x enemies", 3, 0, 5));
-            Sub.Add("WallCheck", new CheckBox("Block dash in wall"));
-            Sub.Add("TurretCheck", new CheckBox("Block dash under turret"));
-            Sub.Add("AAcheck", new CheckBox("Dash only in AA range"));
+            Sub = Config.AddSubMenu(qwer.Slot + " 冲刺设置");
+            Sub.Add("DashMode", new Slider("冲刺 模式 (0 : 鼠标 | 1 : 边上 | 2 : 安全位置)", 2, 0, 2));
+            Sub.Add("EnemyCheck", new Slider("X 敌人时防止冲进", 3, 0, 5));
+            Sub.Add("WallCheck", new CheckBox("防止撞墙"));
+            Sub.Add("TurretCheck", new CheckBox("防止进塔"));
+            Sub.Add("AAcheck", new CheckBox("只在普攻范围内冲刺"));
             Sub.AddSeparator();
-            Sub.AddGroupLabel("Gapcloser");
-            Sub.Add("GapcloserMode", new Slider("Gapcloser MODE (0 : Cursor | 1 : Away - Safe Pos | 2 : Disable)", 1, 0, 2));
+            Sub.AddGroupLabel("接近/防突进");
+            Sub.Add("GapcloserMode", new Slider("接近/防突进 模式 (0 : 鼠标 | 1 : 远离 - 安全位置 | 2 : 关闭)", 1, 0, 2));
 
             foreach (var enemy in ObjectManager.Get<AIHeroClient>().Where(enemy => enemy.IsEnemy))
             {
-                Sub.Add("EGCchampion" + enemy.ChampionName, new CheckBox("Gapclose " + enemy.ChampionName));
+                Sub.Add("EGCchampion" + enemy.ChampionName, new CheckBox("使用在 " + enemy.ChampionName));
             }
 
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
