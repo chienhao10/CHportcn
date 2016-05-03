@@ -68,7 +68,7 @@ namespace ElLeeSin
             insecMenu.Add("checkOthers1", new CheckBox("检查回旋踢其他可用物体"));
             insecMenu.Add("clickInsec", new CheckBox("点击回旋踢"));
             insecMenu.Add("bonusRangeA", new Slider("友军额外距离", 0, 0, 1000));
-            insecMenu.Add("bonusRangeT", new Slider("T防御塔额外距离", 0, 0, 1000));
+            insecMenu.Add("bonusRangeT", new Slider("防御塔额外距离", 0, 0, 1000));
             insecMenu.AddGroupLabel("回旋踢模式:");
             insecMenu.Add("ElLeeSin.Insec.Ally", new CheckBox("踢至友军"));
             insecMenu.Add("ElLeeSin.Insec.Tower", new CheckBox("踢至塔", false));
