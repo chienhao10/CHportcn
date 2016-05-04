@@ -76,63 +76,63 @@
             Q.DamageType = W.DamageType = E.DamageType = R.DamageType = DamageType.Physical;
             Q.MinHitChance = HitChance.VeryHigh;
 
-            comboMenu = config.AddSubMenu("Combo", "Combo");
-            comboMenu.AddGroupLabel("Q/E: Always On");
-            comboMenu.Add("Ignite", new CheckBox("Use Ignite"));
-            comboMenu.AddGroupLabel("Swap Settings");
-            comboMenu.Add("SwapIfKill", new CheckBox("Swap W/R If Mark Can Kill Target", false));
-            comboMenu.Add("SwapIfHpU", new Slider("Swap W/R If Hp < (%)", 10));
-            comboMenu.Add("SwapGap", new ComboBox("Swap W/R To Gap Close", 1, "OFF", "Smart", "Always"));
-            comboMenu.AddGroupLabel("W Settings");
-            comboMenu.Add("WNormal", new CheckBox("Use For Non-R Combo"));
-            comboMenu.Add("WAdv", new ComboBox("Use For R Combo", 1, "OFF", "Line", "Triangle", "Mouse"));
-            comboMenu.AddGroupLabel("R Settings");
-            comboMenu.Add("R", new KeyBind("Use R", false, KeyBind.BindTypes.PressToggle, 'X'));
-            comboMenu.Add("RMode", new ComboBox("Mode", 0, "Always", "Wait Q/E"));
-            comboMenu.Add("RStopRange", new Slider("Prevent Q/W/E If R Ready And Distance <=", (int)(R.Range + 200), (int)R.Range, (int)(R.Range + W.Range)));
+            comboMenu = config.AddSubMenu("连招", "Combo");
+            comboMenu.AddGroupLabel("Q/E: 持续开启");
+            comboMenu.Add("Ignite", new CheckBox("使用 点燃"));
+            comboMenu.AddGroupLabel("替换设置");
+            comboMenu.Add("SwapIfKill", new CheckBox("替换W/R 如果标记能杀死目标", false));
+            comboMenu.Add("SwapIfHpU", new Slider("替换 W/R 如果血量 < (%)", 10));
+            comboMenu.Add("SwapGap", new ComboBox("替换 W/R 接近", 1, "关闭", "智能", "一直"));
+            comboMenu.AddGroupLabel("W 设置");
+            comboMenu.Add("WNormal", new CheckBox("用于 非连招"));
+            comboMenu.Add("WAdv", new ComboBox("用于 R 连招", 1, "关闭", "线形", "三角", "鼠标"));
+            comboMenu.AddGroupLabel("R 设置");
+            comboMenu.Add("R", new KeyBind("使用 R", false, KeyBind.BindTypes.PressToggle, 'X'));
+            comboMenu.Add("RMode", new ComboBox("模式", 0, "一直", "等待 Q/E"));
+            comboMenu.Add("RStopRange", new Slider("防止 Q/W/E  如果 R 可用并且距离<=", (int)(R.Range + 200), (int)R.Range, (int)(R.Range + W.Range)));
             if (EntityManager.Heroes.Enemies.Any())
             {
-                comboMenu.AddGroupLabel("Extra R Settings");
+                comboMenu.AddGroupLabel("额外 R 设置");
                 foreach (var enemy in ObjectManager.Get<AIHeroClient>().Where(o => o.IsEnemy))
                 {
-                    comboMenu.Add("RCast" + enemy.ChampionName, new CheckBox("Cast On " + enemy.ChampionName, false));
+                    comboMenu.Add("RCast" + enemy.ChampionName, new CheckBox("用于 " + enemy.ChampionName, false));
                 }
             }
 
-            hybridMenu = config.AddSubMenu("Hybrid", "Hybrid");
-            hybridMenu.Add("Mode", new ComboBox("Mode", 0, "W-E-Q", "E-Q", "Q"));
-            hybridMenu.AddGroupLabel("Auto Q Settings (Champ)");
-            hybridMenu.Add("AutoQ", new KeyBind("KeyBind", false, KeyBind.BindTypes.PressToggle, 'T'));
-            hybridMenu.Add("AutoQMpA", new Slider("If Mp >=", 100, 0, 200));
-            hybridMenu.AddGroupLabel("Auto E Settings (Champ/Shadow)");
-            hybridMenu.Add("AutoE", new CheckBox("Auto", false));
+            hybridMenu = config.AddSubMenu("混合", "Hybrid");
+            hybridMenu.Add("Mode", new ComboBox("模式", 0, "W-E-Q", "E-Q", "Q"));
+            hybridMenu.AddGroupLabel("自动 Q 设置 (英雄)");
+            hybridMenu.Add("AutoQ", new KeyBind("按键", false, KeyBind.BindTypes.PressToggle, 'T'));
+            hybridMenu.Add("AutoQMpA", new Slider("如果能量 >=", 100, 0, 200));
+            hybridMenu.AddGroupLabel("自动 E 设置 (英雄/影子)");
+            hybridMenu.Add("AutoE", new CheckBox("自动", false));
 
-            lhMenu = config.AddSubMenu("LastHit", "Last Hit");
-            lhMenu.Add("Q", new CheckBox("Use Q"));
+            lhMenu = config.AddSubMenu("LastHit", "尾兵");
+            lhMenu.Add("Q", new CheckBox("使用 Q"));
 
-            ksMenu = config.AddSubMenu("KillSteal", "Kill Steal");
-            ksMenu.Add("Q", new CheckBox("Use Q"));
-            ksMenu.Add("E", new CheckBox("Use E"));
+            ksMenu = config.AddSubMenu("KillSteal", "抢头");
+            ksMenu.Add("Q", new CheckBox("使用 Q"));
+            ksMenu.Add("E", new CheckBox("使用 E"));
 
             if (EntityManager.Heroes.Enemies.Any())
             {
                 Evade.Init();
             }
 
-            drawMenu = config.AddSubMenu("Draw", "Draw");
-            drawMenu.Add("Q", new CheckBox("Q Range", false));
-            drawMenu.Add("W", new CheckBox("W Range", false));
-            drawMenu.Add("E", new CheckBox("E Range", false));
-            drawMenu.Add("R", new CheckBox("R Range", false));
-            drawMenu.Add("RStop", new CheckBox("Prevent Q/W/E Range", false));
-            drawMenu.Add("UseR", new CheckBox("R In Combo Status"));
-            drawMenu.Add("Target", new CheckBox("Target"));
-            drawMenu.Add("DMark", new CheckBox("Death Mark"));
-            drawMenu.Add("WPos", new CheckBox("W Shadow"));
-            drawMenu.Add("RPos", new CheckBox("R Shadow"));
+            drawMenu = config.AddSubMenu("线圈", "Draw");
+            drawMenu.Add("Q", new CheckBox("Q 范围", false));
+            drawMenu.Add("W", new CheckBox("W 范围", false));
+            drawMenu.Add("E", new CheckBox("E 范围", false));
+            drawMenu.Add("R", new CheckBox("R 范围", false));
+            drawMenu.Add("RStop", new CheckBox("防止 Q/W/E 范围", false));
+            drawMenu.Add("UseR", new CheckBox("连招R 状态"));
+            drawMenu.Add("Target", new CheckBox("目标"));
+            drawMenu.Add("DMark", new CheckBox("死亡标记"));
+            drawMenu.Add("WPos", new CheckBox("W 影子"));
+            drawMenu.Add("RPos", new CheckBox("R 影子"));
 
-            miscMenu = config.AddSubMenu("Misc", "Misc");
-            miscMenu.Add("FleeW", new KeyBind("Use W To Flee", false, KeyBind.BindTypes.HoldActive, 'C'));
+            miscMenu = config.AddSubMenu("Misc", "杂项");
+            miscMenu.Add("FleeW", new KeyBind("使用 W 逃跑", false, KeyBind.BindTypes.HoldActive, 'C'));
 
             Evade.Evading += Evading;
             Evade.TryEvading += TryEvading;
@@ -758,7 +758,7 @@
                 if (getCheckBoxItem(drawMenu, "UseR"))
                 {
                     var pos = Drawing.WorldToScreen(Player.Position);
-                    var text = $"Use R In Combo: {(rMenu ? "On" : "Off")}";
+                    var text = $"连招 R: {(rMenu ? "On" : "Off")}";
                     Drawing.DrawText(
                         pos.X - (float)70 / 2,
                         pos.Y + 20,
@@ -780,7 +780,7 @@
                 if (target != null)
                 {
                     var pos = Drawing.WorldToScreen(Player.Position);
-                    var text = "Death Mark: " + target.ChampionName;
+                    var text = "死亡标记: " + target.ChampionName;
                     Drawing.DrawText(pos.X - (float)70 / 2, pos.Y + 40, Color.Red, text);
                 }
             }

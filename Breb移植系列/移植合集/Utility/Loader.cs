@@ -81,12 +81,12 @@ namespace PortAIO.Utility
             }
             else
             {
-                Miscc.AddLabel("此英雄暂不支持已下功能.");
+                Miscc.AddLabel("此英雄暂不支持此功能.");
             }
             Miscc.AddSeparator();
-            Miscc.AddGroupLabel("活化剂更改");
+            Miscc.AddGroupLabel("修改加载内容");
             Miscc.AddLabel("更改已下内容，请按 F5 重新载入 >>");
-            Miscc.Add("champ", new CheckBox("英雄模式? (只会载入英雄脚本)", false));
+            Miscc.Add("champ", new CheckBox("英雄模式? (只载入英雄脚本)", false));
             Miscc.Add("util", new CheckBox("功能模式? (只载入功能脚本)", false));
             Miscc.AddSeparator();
             Miscc.Add("activator", new CheckBox("载入 El活化剂?"));
