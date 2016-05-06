@@ -984,7 +984,6 @@
     <Content Include="Resources\Images\notifications_select.png" />
     <Content Include="Resources\Images\notifications_star.png" />
     <Content Include="Resources\Images\notifications_warning.png" />
-    <None Include="Resources\PortLogo.png" />
     <Content Include="Resources\SPRITES\EloDisplayer\EloGui.png" />
     <Content Include="TO-DO.txt" />
     <None Include="Resources\Minimap_Ward_Pink_Enemy.png" />
