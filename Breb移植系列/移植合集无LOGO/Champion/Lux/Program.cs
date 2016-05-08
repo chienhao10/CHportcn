@@ -121,7 +121,7 @@ namespace MoonLux
             var hero = (AIHeroClient)obj;
 
             if (hero.IsEnemy || (!hero.IsMe && !W.IsInRange(obj))
-                || !getCheckBoxItem(shieldMenu, string.Format("{0}", hero.ChampionName)))
+                || !getCheckBoxItem(shieldMenu, hero.NetworkId + ""))
             {
                 return;
             }
@@ -146,9 +146,7 @@ namespace MoonLux
 
             if (ECasted)
             {
-                if (EObject.Position.CountEnemiesInRange(350) >= 1
-                    && ObjectManager.Get<AIHeroClient>()
-                        .Count(x => x.LSIsValidTarget(350, true, EObject.Position) && !x.HasPassive()) >= 1)
+                if (EObject.Position.CountEnemiesInRange(350) >= 1 && ObjectManager.Get<AIHeroClient>().Count(x => x.LSIsValidTarget(350, true, EObject.Position) && !x.HasPassive()) >= 1)
                 {
                     E.Cast();
                 }
@@ -226,7 +224,7 @@ namespace MoonLux
             shieldMenu = Menu.AddSubMenu("自动W 设置", "ASSettings");
             shieldMenu.Add("ASHealthPercent", new Slider("生命 %", 25));
             shieldMenu.Add("ASDamagePercent", new Slider("伤害 %", 20));
-            HeroManager.Allies.ForEach(x => shieldMenu.Add(x.ChampionName, new CheckBox("保护 " + x.ChampionName)));
+            HeroManager.Allies.ForEach(x => shieldMenu.Add(x.NetworkId + "", new CheckBox("护盾 " + x.ChampionName)));
 
             jungleKsMenu = Menu.AddSubMenu("偷野", "JungleKS");
             jungleKsMenu.Add("StealBaron", new CheckBox("男爵"));
@@ -518,11 +516,12 @@ namespace MoonLux
                 DoHarass();
             }
 
-            if (ECasted && EObject.Position.CountEnemiesInRange(350) >= 1
-                && ObjectManager.Get<AIHeroClient>()
-                    .Count(x => x.LSIsValidTarget(350, true, EObject.Position) && !x.HasPassive()) >= 1)
+            if (EObject != null && Player.CountEnemiesInRange(E.Range + 200) < 1)
             {
-                E.Cast();
+                if (!Player.LSIsRecalling() && ECasted && EObject.Position.CountEnemiesInRange(350) >= 1)
+                {
+                    E.Cast();
+                }
             }
 
             KillSteal();
