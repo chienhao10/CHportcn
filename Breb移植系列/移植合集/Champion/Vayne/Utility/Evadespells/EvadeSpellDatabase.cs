@@ -20,10 +20,11 @@ using System.Collections.Generic;
 using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
+using EvadeA;
 
 #endregion
 
-namespace Evade
+namespace EvadeB
 {
     internal class EvadeSpellDatabase
     {
