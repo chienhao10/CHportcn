@@ -75,7 +75,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
 
             Q.SetCharged("XerathArcanopulseChargeUp", "XerathArcanopulseChargeUp", 700, 1550, 1.5f);
 
-            drawMenu = Config.AddSubMenu("Drawings");
+            drawMenu = Config.AddSubMenu("线圈");
             drawMenu.Add("noti", new CheckBox("Show notification & line"));
             drawMenu.Add("onlyRdy", new CheckBox("Draw only ready spells"));
             drawMenu.Add("qRange", new CheckBox("Q range", false));
