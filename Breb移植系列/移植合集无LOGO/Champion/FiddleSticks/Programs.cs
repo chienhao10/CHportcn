@@ -6,6 +6,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Feedlesticks.Core;
+using SebbyLib;
 using LeagueSharp.Common;
 
 namespace Feedlesticks
@@ -23,7 +24,7 @@ namespace Feedlesticks
         /// <param name="args"></param>
         public static void Game_OnGameLoad()
         {
-            Menus.Config = MainMenu.AddMenu("Feedlestick", "Feedlestick");
+            Menus.Config = MainMenu.AddMenu("稻草人", "Feedlestick");
 
             {
                 Spells.Init();
@@ -79,10 +80,16 @@ namespace Feedlesticks
             }
         }
 
-        public static bool IsWActive
+        private static bool IsWActive
         {
-            get { return ObjectManager.Player.HasBuff("fiddlebuff"); }
+            get
+            {
+                return Player.HasBuff("fiddlebuff") ||
+                       (ObjectManager.Player.LastCastedSpellName() == "fiddlebuff" &&
+                        Utils.TickCount - ObjectManager.Player.LastCastedSpellT() < 500);
+            }
         }
+
 
         /// <summary>
         ///     Process spell cast. thats need for last w game time
@@ -115,7 +122,7 @@ namespace Feedlesticks
                 return;
             }
 
-            if (IsWActive)
+            if (IsWActive || FiddleStick.IsChannelingImportantSpell())
             {
                 Orbwalker.DisableAttacking = true;
                 Orbwalker.DisableMovement = true;
@@ -126,18 +133,18 @@ namespace Feedlesticks
                 Orbwalker.DisableMovement = false;
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && !IsWActive)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && !IsWActive)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
                 Harass();
             }
 
             if ((Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) && !IsWActive)
+                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)))
             {
                 Jungle();
                 WaveClear();
@@ -193,6 +200,7 @@ namespace Feedlesticks
                     Spells.E.Cast(enemy);
                 }
             }
+           
         }
 
         private static void Harass()
