@@ -32,6 +32,30 @@ namespace iLucian
             Game.OnUpdate += OnUpdate;
             Obj_AI_Base.OnSpellCast += OnDoCast;
             DZAntigapcloser.OnEnemyGapcloser += OnEnemyGapcloser;
+            Obj_AI_Base.OnProcessSpellCast += OnSpellCast;
+            Spellbook.OnCastSpell += (sender, args) =>
+            {
+                if (sender.Owner.IsMe && args.Slot == SpellSlot.E)
+                {
+                    Variables.LastECast = LeagueSharp.Common.Utils.TickCount;
+                }
+            };
+        }
+
+        private void OnSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            if (getCheckBoxItem(MenuGenerator.miscOptions, "com.ilucian.misc.antiVayne") && sender.IsEnemy && sender.IsChampion("Vayne")
+                && args.Slot == SpellSlot.E)
+            {
+                var predictedPosition = ObjectManager.Player.ServerPosition.LSExtend(sender.Position, -425);
+                var dashPosition = ObjectManager.Player.Position.LSExtend(Game.CursorPos, 450);
+                var dashCondemnCheck = dashPosition.LSExtend(sender.Position, -425);
+
+                if (Variables.Spell[Variables.Spells.E].IsReady() && predictedPosition.LSIsWall() && !dashCondemnCheck.LSIsWall())
+                {
+                    Variables.Spell[Variables.Spells.E].Cast(dashPosition);
+                }
+            }
         }
 
         public static bool getCheckBoxItem(Menu m, string item)
@@ -61,13 +85,12 @@ namespace iLucian
                 return;
             }
 
-            if (!gapcloser.Sender.IsEnemy || !(gapcloser.End.LSDistance(ObjectManager.Player.ServerPosition) < 350))
+            if (!gapcloser.Sender.IsEnemy || !(gapcloser.End.Distance(ObjectManager.Player.ServerPosition) < 200))
                 return;
 
             var extendedPosition = ObjectManager.Player.ServerPosition.LSExtend(Game.CursorPos,
                 Variables.Spell[Variables.Spells.E].Range);
-            if (extendedPosition.IsSafe(Variables.Spell[Variables.Spells.E].Range) &&
-                extendedPosition.CountAlliesInRange(650f) > 0)
+            if (extendedPosition.IsSafe(Variables.Spell[Variables.Spells.E].Range))
             {
                 Variables.Spell[Variables.Spells.E].Cast(extendedPosition);
             }
@@ -80,8 +103,7 @@ namespace iLucian
 
             var target = TargetSelector.GetTarget(Variables.Spell[Variables.Spells.Q].Range,
                 DamageType.Physical);
-            if (target == null)
-                return;
+            if (target == null || Variables.LastECast < 250) return;
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
@@ -136,7 +158,8 @@ namespace iLucian
                         Variables.Spell[Variables.Spells.Q].Cast(target);
                     }
                 }
-                if (!ObjectManager.Player.LSIsDashing() && getCheckBoxItem(MenuGenerator.harassOptions, "com.ilucian.harass.w"))
+                if (!ObjectManager.Player.LSIsDashing()
+                    && getCheckBoxItem(MenuGenerator.harassOptions, "com.ilucian.harass.w"))
                 {
                     if (Variables.Spell[Variables.Spells.W].IsReady())
                     {
@@ -148,14 +171,15 @@ namespace iLucian
                                 Variables.Spell[Variables.Spells.W].Cast(prediction.CastPosition);
                             }
                         }
-                    }
-                    else
-                    {
-                        if (target.LSDistance(ObjectManager.Player) < 600)
+                        else
                         {
-                            Variables.Spell[Variables.Spells.W].Cast(target.Position);
+                            if (target.Distance(ObjectManager.Player) < 600)
+                            {
+                                Variables.Spell[Variables.Spells.W].Cast(target.Position);
+                            }
                         }
                     }
+
                 }
             }
         }
@@ -522,6 +546,9 @@ namespace iLucian
                     {
                         Variables.Spell[Variables.Spells.E].Cast(bestPosition);
                     }
+                    break;
+                case 6: // URF
+                    Variables.Spell[Variables.Spells.E].Cast(ObjectManager.Player.Position.LSExtend(Game.CursorPos, 475));
                     break;
             }
         }
