@@ -146,7 +146,7 @@
 
             float i = 0;
 
-            foreach (var hero in HeroManager.Enemies)
+            foreach (var hero in HeroManager.Enemies.Where(x => !x.IsDead))
             {
                 var champion = hero.ChampionName;
                 if (champion.Length > 12)
