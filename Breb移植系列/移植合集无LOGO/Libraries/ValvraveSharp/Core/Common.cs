@@ -49,7 +49,7 @@ namespace Valvrave_Sharp.Core
             bool aoe = false,
             CollisionableObjects collisionable = CollisionableObjects.Minions | CollisionableObjects.YasuoWall)
         {
-            if (!unit.LSIsValidTarget())
+            if (!unit.IsValidTarget())
             {
                 return CastStates.InvalidTarget;
             }

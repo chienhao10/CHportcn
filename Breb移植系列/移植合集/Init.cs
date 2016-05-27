@@ -12,7 +12,6 @@ using PortAIO.Properties;
 using iLucian;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Notifications;
-using LeagueSharp.SDK.Core.Utils;
 // ReSharper disable ObjectCreationAsStatement
 
 #endregion
@@ -23,9 +22,8 @@ namespace PortAIO
     {
         private static void Main()
         {
-            LeagueSharp.SDK.Bootstrap.Init();
             Loading.OnLoadingComplete += Initialize;
-            //Game.OnUpdate += Game_OnUpdate;
+            Game.OnUpdate += Game_OnUpdate;
         }
 
         private static void Game_OnUpdate(EventArgs args)
@@ -33,7 +31,7 @@ namespace PortAIO
             //Console.WriteLine(Orbwalker.ActiveModesFlags.ToString());
         }
 
-        private static LeagueSharp.Common.Render.Sprite Intro;
+        private static Render.Sprite Intro;
         private static float IntroTimer = Game.Time;
         public static SCommon.PluginBase.Champion Champion;
         public static List<string> RandomUltChampsList = new List<string>(new[] { "Ezreal", "Jinx", "Ashe", "Draven", "Gangplank", "Ziggs", "Lux", "Xerath" });
@@ -58,7 +56,7 @@ namespace PortAIO
 
             if (Loader.intro)
             {
-                Intro = new LeagueSharp.Common.Render.Sprite(LoadImg("PortLogo"), new Vector2((Drawing.Width / 2) - 175, (Drawing.Height / 2) - 300));
+                Intro = new Render.Sprite(LoadImg("PortLogo"), new Vector2((Drawing.Width / 2) - 175, (Drawing.Height / 2) - 300));
                 Intro.Add(0);
                 Intro.OnDraw();
                 LeagueSharp.Common.Utility.DelayAction.Add(5000, () => Intro.Remove());
@@ -313,20 +311,6 @@ namespace PortAIO
                                 break;
                         }
                         break;
-                    case "sivir":
-                        switch (Loader.sivir)
-                        {
-                            case 0:
-                                SebbyLib.Program.GameOnOnGameLoad();
-                                break;
-                            case 1:
-                                ExorSDK.AIO.OnLoad();
-                                break;
-                            default:
-                                SebbyLib.Program.GameOnOnGameLoad();
-                                break;
-                        }
-                        break;
                     case "thresh": // OKTW - Sebby - All Seeby champs go down here
                     case "annie":
                     case "braum":
@@ -335,6 +319,7 @@ namespace PortAIO
                     case "missfortune":
                     case "malzahar":
                     case "orianna":
+                    case "sivir":
                     case "syndra":
                     case "velkoz":
                     case "swain":
@@ -870,8 +855,19 @@ namespace PortAIO
                     case "maokai": // Underrated AIO
                         new UnderratedAIO.Champions.Maokai();
                         break;
-                    case "masteryi": // MasterSharp
-                        MasterSharp.MasterSharp.OnLoad();
+                    case "masteryi": // MasterSharp & Hoola Yi
+                        switch (Loader.masteryi)
+                        {
+                            case 0:
+                                MasterSharp.MasterSharp.OnLoad();
+                                break;
+                            case 1:
+                                HoolaMasterYi.Program.OnGameLoad();
+                                break;
+                            default:
+                                MasterSharp.MasterSharp.OnLoad();
+                                break;
+                        }
                         break;
                     case "mordekaiser": // How to Train your dragon
                         Mordekaiser.Program.Game_OnGameLoad();
