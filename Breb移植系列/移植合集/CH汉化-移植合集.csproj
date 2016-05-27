@@ -1193,7 +1193,6 @@
     <None Include="Resources\ChampionData\Zyra.json" />
     <None Include="Resources\DamageData\6.8.json" />
     <None Include="Resources\SpellDatabase.json" />
-    <None Include="Resources\Thumbs.db" />
     <None Include="Resources\TrapLocationsData.json" />
   </ItemGroup>
   <ItemGroup>
