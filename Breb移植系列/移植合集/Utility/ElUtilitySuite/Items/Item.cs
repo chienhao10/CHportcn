@@ -106,7 +106,8 @@ namespace ElUtilitySuite.Items
         /// </summary>
         public virtual void UseItem()
         {
-            Items.UseItem((int)this.Id);
+            //Items.UseItem((int)this.Id);
+            EloBuddy.SDK.Item.UseItem((int)this.Id);
         }
 
         public static bool getCheckBoxItem(Menu m, string item)
