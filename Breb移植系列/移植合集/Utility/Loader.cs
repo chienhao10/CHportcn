@@ -77,7 +77,6 @@ namespace PortAIO.Utility
         public static int ahri { get { return Miscc["ahri"].Cast<ComboBox>().CurrentValue; } }
         public static bool banwards { get { return Miscc["banwards"].Cast<CheckBox>().CurrentValue; } }
         public static bool antialistar { get { return Miscc["antialistar"].Cast<CheckBox>().CurrentValue; } }
-        public static bool traptrack { get { return Miscc["traptrack"].Cast<CheckBox>().CurrentValue; } }
         public static int elise { get { return Miscc["elise"].Cast<ComboBox>().CurrentValue; } }
         public static int rengar { get { return Miscc["rengar"].Cast<ComboBox>().CurrentValue; } }
         public static int zed { get { return Miscc["zed"].Cast<ComboBox>().CurrentValue; } }
@@ -87,7 +86,7 @@ namespace PortAIO.Utility
         public static int taliyah { get { return Miscc["taliyah"].Cast<ComboBox>().CurrentValue; } }
         public static int janna { get { return Miscc["janna"].Cast<ComboBox>().CurrentValue; } }
         public static int irelia { get { return Miscc["irelia"].Cast<ComboBox>().CurrentValue; } }
-        public static int sivir { get { return Miscc["sivir"].Cast<ComboBox>().CurrentValue; } }
+        public static int masteryi { get { return Miscc["masteryi"].Cast<ComboBox>().CurrentValue; } }
 
         public static Menu Miscc;
 
@@ -152,7 +151,7 @@ namespace PortAIO.Utility
             "Taliyah", //50
             "Janna", //51
             "Irelia", //52
-            "Sivir", //53
+            "MasterYi" //53
         });
 
         public static void Menu()
@@ -365,19 +364,19 @@ namespace PortAIO.Utility
                 }
                 if (Player.ChampionName.Equals(Champion[50]))
                 {
-                    Miscc.Add("taliyah", new ComboBox("切换 塔莉亚脚本 : ", 0, "Taliyah", "TophSharp"));
+                    Miscc.Add("taliyah", new ComboBox("Use addon for Taliyah : ", 0, "Taliyah", "TophSharp"));
                 }
                 if (Player.ChampionName.Equals(Champion[51]))
                 {
-                    Miscc.Add("janna", new ComboBox("切换 风女脚本 : ", 0, "LCS Janna", "FreshBooster"));
+                    Miscc.Add("janna", new ComboBox("Use addon for Janna : ", 0, "LCS Janna", "FreshBooster"));
                 }
                 if (Player.ChampionName.Equals(Champion[52]))
                 {
-                    Miscc.Add("irelia", new ComboBox("切换 刀妹脚本 : ", 0, "挑战者系列", "IreliaGOD"));
+                    Miscc.Add("irelia", new ComboBox("Use addon for Irelia : ", 0, "ChallengerSeries", "IreliaGOD"));
                 }
                 if (Player.ChampionName.Equals(Champion[53]))
                 {
-                    Miscc.Add("sivir", new ComboBox("切换 战争女神脚本 : ", 0, "OKTW", "ExorAIO SDK"));
+                    Miscc.Add("masteryi", new ComboBox("Use addon for MasterYi : ", 0, "MasterSharp", "Hoola Yi"));
                 }
             }
             else
@@ -396,7 +395,7 @@ namespace PortAIO.Utility
             Miscc.AddSeparator();
             Miscc.Add("skin", new CheckBox("开启换肤?"));
             Miscc.Add("evade", new CheckBox("开启 躲避?", false));
-            Miscc.Add("godTracker", new CheckBox("载入 野区计时（El活化剂中有）?", false));
+            Miscc.Add("godTracker", new CheckBox("载入 野区计时（El活化剂中有?", false));
             Miscc.AddSeparator();
             Miscc.Add("ping", new CheckBox("载入 信号管理器（玩家信号）?", false));
             Miscc.Add("human", new CheckBox("载入 人性化?", false));
@@ -405,7 +404,6 @@ namespace PortAIO.Utility
             Miscc.Add("cheat", new CheckBox("开启 辅助探测器?", false));
             Miscc.Add("banwards", new CheckBox("开启 Sebby 人性化?", false));
             Miscc.Add("antialistar", new CheckBox("开启 防牛头冲撞?", true));
-            Miscc.Add("traptrack", new CheckBox("开启 陷阱计时?", false));
 
             /*
             Miscc.Add("stream", new CheckBox("Enable StreamBuddy?", false));

@@ -230,7 +230,7 @@ namespace KurisuRiven
                     {
                         if (riventarget().LSIsValidTarget() && !riventarget().IsZombie && !riventarget().HasBuff("kindredrnodeathbuff"))
                         {
-                            if (shy() && uo && !canhd)
+                            if (shy() && uo)
                             {
                                 if (riventarget().HasBuffOfType(BuffType.Stun))
                                     r.Cast(riventarget().ServerPosition);
@@ -433,10 +433,6 @@ namespace KurisuRiven
 
                     else if (q.IsReady() && riventarget().LSDistance(player.ServerPosition) <= truerange + 100)
                     {
-                        if (Utils.GameTimeTickCount - lastw < 500 && Utils.GameTimeTickCount - lasthd < 1000)
-                        {
-                            DoOneQ(riventarget().ServerPosition);
-                        }
                         checkr();
                         TryIgnote(riventarget());
 
@@ -539,7 +535,6 @@ namespace KurisuRiven
             r2Menu.AddSeparator();
 
             r2Menu.Add("usews", new CheckBox("Use R2 in Combo"));
-            r2Menu.Add("rhitc", new ComboBox("-> Hitchance", 2, "Medium", "High", "Very High"));
             r2Menu.Add("saver", new CheckBox("Save R2 (When in AA Range)", false));
             r2Menu.Add("overaa", new Slider("Dont R2 if target will die in AA", 2, 1, 6));
             r2Menu.Add("wsmode", new ComboBox("Use R2 when", 1, "Kill Only", "Max Damage"));
@@ -841,8 +836,6 @@ namespace KurisuRiven
 
         private static void HarassTarget(Obj_AI_Base target)
         {
-            if (target == null)
-                return;
             Vector3 qpos;
             switch (getBoxItem(harassMenu, "qtoo"))
             {
@@ -855,9 +848,11 @@ namespace KurisuRiven
                         .Where(t => (t.IsAlly)).OrderBy(t => t.LSDistance(player.Position)).First();
                     if (tt != null)
                         qpos = tt.Position;
-                    else
+                    else if (target != null)
                         qpos = player.ServerPosition +
-                                (player.ServerPosition - target.ServerPosition).LSNormalized() * 500;
+                               (player.ServerPosition - target.ServerPosition).LSNormalized() * 500;
+                    else
+                        qpos = Game.CursorPos;
                     break;
                 default:
                     qpos = Game.CursorPos;
@@ -879,7 +874,7 @@ namespace KurisuRiven
 
                     if (Player.IssueOrder(GameObjectOrder.MoveTo, qpos))
                     {
-                        Utility.DelayAction.Add(150 - Game.Ping/2, () =>
+                        Utility.DelayAction.Add(150 - Game.Ping, () =>
                         {
                             q.Cast(qpos);
 
@@ -902,7 +897,7 @@ namespace KurisuRiven
                 }
             }
 
-            if (!target.ServerPosition.UnderTurret(true))
+            if (!player.ServerPosition.LSExtend(target.ServerPosition, q.Range * 3).UnderTurret(true))
             {
                 if (q.IsReady() && canq && (cc < 2 || e.IsReady()))
                 {
@@ -917,7 +912,7 @@ namespace KurisuRiven
                 target.LSDistance(player.ServerPosition) > truerange + 100 &&
                 target.LSDistance(player.ServerPosition) <= e.Range + truerange + 50)
             {
-                if (!target.ServerPosition.UnderTurret(true))
+                if (!player.ServerPosition.LSExtend(target.ServerPosition, e.Range).UnderTurret(true))
                 {
                     if (Getcheckboxvalue(harassMenu, "usegaph") && cane)
                     {
@@ -928,7 +923,7 @@ namespace KurisuRiven
 
             else if (w.IsReady() && canw && target.LSDistance(player.ServerPosition) <= w.Range + 10)
             {
-                if (!player.ServerPosition.UnderTurret(true))
+                if (!target.ServerPosition.UnderTurret(true))
                 {
                     if (Getcheckboxvalue(harassMenu, "useharassw") && canw)
                     {
@@ -992,7 +987,7 @@ namespace KurisuRiven
                                 if (riventarget().LSDistance(player.ServerPosition) <= truerange + q.Range)
                                 {
                                     var p = r.GetPrediction(riventarget(), true, -1f, new[] { CollisionableObjects.YasuoWall });
-                                    if (p.Hitchance == HitChance.High && canws && !riventarget().HasBuff("kindredrnodeathbuff"))
+                                    if (p.Hitchance >= HitChance.High && canws && !riventarget().HasBuff("kindredrnodeathbuff"))
                                     {
                                         if (!isteamfightkappa || Getcheckboxvalue(r2Menu, "r" + riventarget().ChampionName) ||
                                              isteamfightkappa && !rrektAny())
@@ -1014,7 +1009,7 @@ namespace KurisuRiven
                         {
                             if (Orbwalking.InAutoAttackRange(t) && player.LSCountEnemiesInRange(r.Range) > 1)
                             {
-                                continue;
+                                return;
                             }
                         }
                     }
@@ -1022,7 +1017,7 @@ namespace KurisuRiven
                     if (Rdmg(t) >= t.Health)
                     {
                         var p = r.GetPrediction(t, true, -1f, new[] { CollisionableObjects.YasuoWall });
-                        if (p.Hitchance == (HitChance)getBoxItem(r2Menu, "rhitc") + 4 && canws && !t.HasBuff("kindredrnodeathbuff"))
+                        if (p.Hitchance == HitChance.High && canws && !t.HasBuff("kindredrnodeathbuff"))
                         {
                             r.Cast(p.CastPosition);
                         }
@@ -1458,21 +1453,15 @@ namespace KurisuRiven
                             }
                         }
 
-                        if (Getkeybindvalue(keybindsMenu, "shycombo"))
-                        {
-                            if (cc == 2 && !uo && r.IsReady() && riventarget() != null)
-                            {
-                                checkr();
-                                Utility.DelayAction.Add(240 - Game.Ping, () => q.Cast(riventarget().ServerPosition));
-                            }
-                        }
+
+
 
                         if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                         {
-                            if (cc == 2 && !uo && r.IsReady() && riventarget() != null)
+                            if (cc == 2 && !uo && r.IsReady())
                             {
                                 checkr();
-                                Utility.DelayAction.Add(240 - Game.Ping, () => q.Cast(riventarget().ServerPosition));
+                                Utility.DelayAction.Add(240 - Game.Ping, () => q.Cast(Game.CursorPos));
                             }
 
                             if (getBoxItem(r2Menu, "wsmode") == 1 && cc == 2 && uo)
@@ -1746,7 +1735,7 @@ namespace KurisuRiven
 
             var rw = Wdmg(target);
             var rq = Qdmg(target);
-            var rr = r.IsReady() ? Rdmg(target) : 0;
+            var rr = r.IsReady() ? r.GetDamage(target) : 0;
 
             var ii = (ignote != SpellSlot.Unknown && player.GetSpell(ignote).State == SpellState.Ready && r.IsReady()
                 ? player.GetSummonerSpellDamage(target, Damage.SummonerSpell.Ignite)
