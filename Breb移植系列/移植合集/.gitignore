@@ -20,8 +20,6 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
-/bin
-/obj
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -40,9 +38,6 @@ TestResult.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
-
-#Pack
-*.rar
 
 # DNX
 project.lock.json
