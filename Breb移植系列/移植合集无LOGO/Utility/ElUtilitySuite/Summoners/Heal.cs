@@ -93,7 +93,7 @@
                 healMenu.Add("min-damage", new Slider("预计受到 伤害% 使用治疗", 20, 1));
                 foreach (var x in ObjectManager.Get<AIHeroClient>().Where(x => x.IsAlly))
                 {
-                    healMenu.Add("healon" + x.ChampionName, new Slider("为以下使用 " + x.ChampionName));
+                    healMenu.Add("healon" + x.ChampionName, new CheckBox("为以下使用 " + x.ChampionName));
                 }
             }
 
@@ -153,15 +153,10 @@
 
                     var enemies = ally.LSCountEnemiesInRange(600);
                     var totalDamage = IncomingDamageManager.GetDamage(ally) * 1.1f;
-                    if (totalDamage <= 0)
-                    {
-                        return;
-                    }
 
-                    if (ally.HealthPercent <= getSliderItem(this.Menu, "min-health") && this.HealSpell.IsInRange(ally) && enemies >= 1)
+                    if (ally.HealthPercent <= getSliderItem(this.Menu, "min-health") && (this.HealSpell.IsInRange(ally) || ally.IsMe) && enemies >= 1)
                     {
-                        if ((int)(totalDamage / ally.Health) > getSliderItem(this.Menu, "min-damage")
-                            || ally.HealthPercent < getSliderItem(this.Menu, "min-health"))
+                        if ((int)(totalDamage / ally.Health) > getSliderItem(this.Menu, "min-damage") || ally.HealthPercent < getSliderItem(this.Menu, "min-health"))
                         {
                             this.Player.Spellbook.CastSpell(this.HealSpell.Slot);
                             Console.ForegroundColor = ConsoleColor.Green;
