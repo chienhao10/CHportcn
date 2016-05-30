@@ -326,6 +326,7 @@
     <Compile Include="Dual-Port\IreliaGod\IreliaMenu.cs" />
     <Compile Include="Dual-Port\IreliaGod\Program.cs" />
     <Compile Include="Dual-Port\IreliaGod\Spells.cs" />
+    <Compile Include="Dual-Port\iTwitch\CustomDamageIndicator.cs" />
     <Compile Include="Dual-Port\iTwitch\Extensions.cs" />
     <Compile Include="Dual-Port\iTwitch\Twitch.cs" />
     <Compile Include="Dual-Port\KurisuBlitz\Program.cs" />
@@ -1440,7 +1441,6 @@
     <Content Include="Resources\Images\notifications_select.png" />
     <Content Include="Resources\Images\notifications_star.png" />
     <Content Include="Resources\Images\notifications_warning.png" />
-    <None Include="Resources\PortLogo.png" />
     <None Include="Resources\Irelia.png" />
     <None Include="Resources\Janna.png" />
     <None Include="Resources\JarvanIV.png" />
