@@ -135,3 +135,6 @@ lucian，lee，yasuo，hJhin 添加，女警，小学生之手，深海泰坦，
 
 6/3
 修复autosharp，更新lucian，时光，女警，潘森，狮子狗
+
+6/3 V2
+增加新狮子狗
