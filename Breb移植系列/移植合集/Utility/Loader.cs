@@ -16,6 +16,7 @@ namespace PortAIO.Utility
 {
     class Loader
     {
+        public static bool orbwalker { get { return Miscc["orbwalker"].Cast<CheckBox>().CurrentValue; } }
         public static bool VCursor { get { return Miscc["VCursor"].Cast<CheckBox>().CurrentValue; } }
         public static bool limitedShat { get { return Miscc["limitedShat"].Cast<CheckBox>().CurrentValue; } }
         public static bool autoLevel { get { return Miscc["autoLevel"].Cast<CheckBox>().CurrentValue; } }
@@ -115,7 +116,7 @@ namespace PortAIO.Utility
         }
 
         public static List<string> RandomUltChampsList = new List<string>(new[] { "Ezreal", "Jinx", "Ashe", "Draven", "Gangplank", "Ziggs", "Lux", "Xerath" });
-        public static List<string> BaseUltList = new List<string>(new[] { "Jinx", "Ashe", "Draven", "Ezreal", "Karthus"});
+        public static List<string> BaseUltList = new List<string>(new[] { "Jinx", "Ashe", "Draven", "Ezreal", "Karthus" });
         public static List<string> Champion = new List<string>(new[] {
             "Soraka", // 0
             "KogMaw", // 1
@@ -179,248 +180,248 @@ namespace PortAIO.Utility
 
         public static void Menu()
         {
-            Miscc = MainMenu.AddMenu("PortAIO Misc", "berbsicmisc");
-            Miscc.Add("intro", new CheckBox("Load Intro?", true));
+            Miscc = MainMenu.AddMenu("CH汉化控制台", "berbsicmisc");
+            Miscc.Add("intro", new CheckBox("加载 引导界面?", true));
             Miscc.AddSeparator();
-            Miscc.AddGroupLabel("Champion Changes");
+            Miscc.AddGroupLabel("英雄脚本切换");
             if (Champion.Contains(ObjectManager.Player.ChampionName))
             {
                 if (Player.ChampionName.Equals(Champion[0]))
                 {
-                    Miscc.Add("soraka", new ComboBox("Use addon for Soraka : ", 0, "Sophie Soraka", "ChallengerSeries"));
+                    Miscc.Add("soraka", new ComboBox("切换 索拉卡脚本 : ", 0, "Sophie 索拉卡", "挑战者系列"));
                 }
                 if (Player.ChampionName.Equals(Champion[1]))
                 {
-                    Miscc.Add("kogmaw", new ComboBox("Use addon for Kog'Maw : ", 0, "Sharpshooter", "ChallengerSeries", "OKTW"));
+                    Miscc.Add("kogmaw", new ComboBox("切换 大嘴脚本 : ", 0, "神射手", "挑战者系列", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[2]))
                 {
-                    Miscc.Add("leesin", new ComboBox("Use addon for Lee Sin : ", 0, "ValvraveSharp", "El Lee Sin : Reborn", "FreshBooster"));
+                    Miscc.Add("leesin", new ComboBox("切换 李星脚本 : ", 0, "ValvraveSharp", "El李星 : 重生", "FreshBooster"));
                 }
                 if (Player.ChampionName.Equals(Champion[3]))
                 {
-                    Miscc.Add("kalista", new ComboBox("Use addon for Kalista : ", 0, "iKalista", "iKalista - Reborn", "ChallengerSeries"));
+                    Miscc.Add("kalista", new ComboBox("切换 滑板鞋脚本 : ", 0, "i滑板鞋", "i滑板鞋 - 重生", "挑战者系列"));
                 }
                 if (Player.ChampionName.Equals(Champion[4]))
                 {
-                    Miscc.Add("diana", new ComboBox("Use addon for Diana : ", 0, "ElDiana", "Nechrito Diana"));
+                    Miscc.Add("diana", new ComboBox("切换 皎月脚本 : ", 0, "El皎月", "Nechrito 皎月"));
                 }
                 if (Player.ChampionName.Equals(Champion[5]))
                 {
-                    Miscc.Add("cait", new ComboBox("Use addon for Caitlyn : ", 0, "OKTW", "ExorSeries : AIO"));
+                    Miscc.Add("cait", new ComboBox("切换 女警脚本 : ", 0, "OKTW", "Exor系列 : AIO"));
                 }
                 if (Player.ChampionName.Equals(Champion[6]))
                 {
-                    Miscc.Add("twitch", new ComboBox("Use addon for Twitch : ", 0, "OKTW", "Nechrito Twitch", "iTwitch"));
+                    Miscc.Add("twitch", new ComboBox("切换 老鼠脚本 : ", 0, "OKTW", "Nechrito 老鼠", "iTwitch"));
                 }
                 if (Player.ChampionName.Equals(Champion[7]))
                 {
-                    Miscc.Add("nidalee", new ComboBox("Use addon for Nidalee : ", 0, "Kurisu", "Nechrito"));
+                    Miscc.Add("nidalee", new ComboBox("切换 豹女脚本 : ", 0, "Kurisu", "Nechrito"));
                 }
                 if (Player.ChampionName.Equals(Champion[8]))
                 {
-                    Miscc.Add("lucian", new ComboBox("Use addon for Lucian : ", 0, "LCS Lucian", "ChallengerSeries", "iLucian"));
+                    Miscc.Add("lucian", new ComboBox("切换 卢锡安脚本 : ", 0, "LCS 卢锡安", "挑战者系列", "i卢锡安"));
                 }
                 if (Player.ChampionName.Equals(Champion[9]))
                 {
-                    Miscc.Add("ashe", new ComboBox("Use addon for Ashe : ", 0, "OKTW", "ChallengerSeries"));
+                    Miscc.Add("ashe", new ComboBox("切换 艾希脚本 : ", 0, "OKTW", "挑战者系列"));
                 }
                 if (Player.ChampionName.Equals(Champion[10]))
                 {
-                    Miscc.Add("vayne", new ComboBox("Use addon for Vayne : ", 0, "ChallengerVayne", "VayneHunterReborn", "hi im gosu", "hVayne SDK"));
+                    Miscc.Add("vayne", new ComboBox("切换 薇恩脚本 : ", 0, "挑战者Vayne", "薇恩猎手：重生（VHR)", "hi im gosu", "hVayne SDK"));
                 }
                 if (Player.ChampionName.Equals(Champion[11]))
                 {
-                    Miscc.Add("jayce", new ComboBox("Use addon for Jayce : ", 0, "OKTW", "Hoe's Jayce"));
+                    Miscc.Add("jayce", new ComboBox("切换 杰斯脚本 : ", 0, "OKTW", "Hoe's 杰斯"));
                 }
                 if (Player.ChampionName.Equals(Champion[12]))
                 {
-                    Miscc.Add("yasuo", new ComboBox("Use addon for Yasuo : ", 0, "ValvraveSharp", "YasuoPro", "GosuMechanics"));
+                    Miscc.Add("yasuo", new ComboBox("切换 亚索脚本 : ", 0, "ValvraveSharp", "亚索Pro", "GosuMechanics"));
                 }
                 if (Player.ChampionName.Equals(Champion[13]))
                 {
-                    Miscc.Add("katarina", new ComboBox("Use addon for Katarina : ", 0, "Staberina", "e.Motion Katarina"));
+                    Miscc.Add("katarina", new ComboBox("切换 卡特脚本 : ", 0, "Staberina", "e.Motion卡特"));
                 }
                 if (Player.ChampionName.Equals(Champion[14]))
                 {
-                    Miscc.Add("xerath", new ComboBox("Use addon for Xerath : ", 0, "OKTW", "ElXerath"));
+                    Miscc.Add("xerath", new ComboBox("切换 泽拉斯脚本 : ", 0, "OKTW", "El泽拉斯"));
                 }
                 if (Player.ChampionName.Equals(Champion[15]))
                 {
-                    Miscc.Add("gragas", new ComboBox("Use addon for Gragas : ", 0, "Drunk Carry", "Nechrito"));
+                    Miscc.Add("gragas", new ComboBox("切换 酒桶脚本 : ", 0, "Drunk Carry", "Nechrito"));
                 }
                 if (Player.ChampionName.Equals(Champion[16]))
                 {
-                    Miscc.Add("draven", new ComboBox("Use addon for Draven : ", 0, "Sharp Shooter/Exor", "Tyler1"));
+                    Miscc.Add("draven", new ComboBox("切换 德莱文脚本 : ", 0, "神射手/Exor", "Tyler1"));
                 }
                 if (Player.ChampionName.Equals(Champion[17]))
                 {
-                    Miscc.Add("ezreal", new ComboBox("Use addon for Ezreal : ", 0, "OKTW", "iDzEzreal"));
+                    Miscc.Add("ezreal", new ComboBox("切换 EZ脚本 : ", 0, "OKTW", "iDzEzreal"));
                 }
                 if (Player.ChampionName.Equals(Champion[18]))
                 {
-                    Miscc.Add("brand", new ComboBox("Use addon for Brand : ", 0, "TheBrand", "OKTW"));
+                    Miscc.Add("brand", new ComboBox("切换 火男脚本 : ", 0, "TheBrand", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[19]))
                 {
-                    Miscc.Add("blitzcrank", new ComboBox("Use addon for Blitzcrank : ", 0, "FreshBooster", "OKTW", "KurisuBlitz"));
+                    Miscc.Add("blitzcrank", new ComboBox("切换 机器人脚本 : ", 0, "FreshBooster", "OKTW", "KurisuBlitz"));
                 }
                 if (Player.ChampionName.Equals(Champion[20]))
                 {
-                    Miscc.Add("corki", new ComboBox("Use addon for Corki : ", 0, "ElCorki", "OKTW", "D-Corki"));
+                    Miscc.Add("corki", new ComboBox("切换 飞机脚本 : ", 0, "ElCorki", "OKTW", "D-Corki"));
                 }
                 if (Player.ChampionName.Equals(Champion[21]))
                 {
-                    Miscc.Add("darius", new ComboBox("Use addon for Darius : ", 0, "ExoryAIO", "OKTW"));
+                    Miscc.Add("darius", new ComboBox("切换 诺克脚本 : ", 0, "ExoryAIO", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[22]))
                 {
-                    Miscc.Add("evelynn", new ComboBox("Use addon for Evelynn : ", 0, "Evelynn#", "OKTW"));
+                    Miscc.Add("evelynn", new ComboBox("切换 寡妇脚本 : ", 0, "Evelynn#", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[23]))
                 {
-                    Miscc.Add("jhin", new ComboBox("Use addon for Jhin : ", 0, "Jhin Virtuoso", "OKTW", "hJhin"));
+                    Miscc.Add("jhin", new ComboBox("切换 烬脚本 : ", 0, "Jhin Virtuoso", "OKTW", "hJhin"));
                 }
                 if (Player.ChampionName.Equals(Champion[24]))
                 {
-                    Miscc.Add("kindred", new ComboBox("Use addon for Kindred : ", 0, "Kindred Yin Yang", "OKTW"));
+                    Miscc.Add("kindred", new ComboBox("切换 千玗脚本 : ", 0, "Kindred Yin Yang", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[25]))
                 {
-                    Miscc.Add("lux", new ComboBox("Use addon for Lux : ", 0, "MoonLux", "OKTW"));
+                    Miscc.Add("lux", new ComboBox("切换 拉克丝脚本 : ", 0, "MoonLux", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[26]))
                 {
-                    Miscc.Add("morgana", new ComboBox("Use addon for Morgana : ", 0, "Kurisu Morgana", "OKTW"));
+                    Miscc.Add("morgana", new ComboBox("切换 魔甘那脚本 : ", 0, "Kurisu Morgana", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[27]))
                 {
-                    Miscc.Add("quinn", new ComboBox("Use addon for Quinn : ", 0, "GFuel Quinn", "OKTW"));
+                    Miscc.Add("quinn", new ComboBox("切换 奎恩脚本 : ", 0, "GFuel Quinn", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[28]))
                 {
-                    Miscc.Add("twistedfate", new ComboBox("Use addon for TwistedFate : ", 0, "Esk0r", "OKTW"));
+                    Miscc.Add("twistedfate", new ComboBox("切换 卡牌脚本 : ", 0, "Esk0r", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[29]))
                 {
-                    Miscc.Add("kayle", new ComboBox("Use addon for Kayle : ", 0, "SephKayle", "OKTW"));
+                    Miscc.Add("kayle", new ComboBox("切换 天使脚本 : ", 0, "SephKayle", "OKTW"));
                 }
                 if (Player.ChampionName.Equals(Champion[30]))
                 {
-                    Miscc.Add("jax", new ComboBox("Use addon for Jax : ", 0, "xQx Jax", "NoobJaxReloaded"));
+                    Miscc.Add("jax", new ComboBox("切换 酒桶脚本Jax : ", 0, "xQx Jax", "NoobJaxReloaded"));
                 }
                 if (Player.ChampionName.Equals(Champion[31]))
                 {
-                    Miscc.Add("sion", new ComboBox("Use addon for Sion : ", 0, "UnderratedAIO", "SimpleSion"));
+                    Miscc.Add("sion", new ComboBox("切换 塞恩脚本 : ", 0, "UnderratedAIO", "SimpleSion"));
                 }
                 if (Player.ChampionName.Equals(Champion[32]))
                 {
-                    Miscc.Add("ryze", new ComboBox("Use addon for Ryze : ", 0, "ExoryAIO", "ElEasy Ryze", "SluttyRyze", "Arcane Ryze"));
+                    Miscc.Add("ryze", new ComboBox("切换 瑞兹脚本 : ", 0, "ExoryAIO", "ElEasy Ryze", "Arcane Ryze"));
                 }
                 if (Player.ChampionName.Equals(Champion[33]))
                 {
-                    Miscc.Add("sona", new ComboBox("Use addon for Sona : ", 0, "vSupport", "ElEasy Sona"));
+                    Miscc.Add("sona", new ComboBox("切换 琴女脚本 : ", 0, "vSupport", "ElEasy Sona"));
                 }
                 if (Player.ChampionName.Equals(Champion[34]))
                 {
-                    Miscc.Add("trundle", new ComboBox("Use addon for Trundle : ", 0, "ElTrundle", "FastTrundle"));
+                    Miscc.Add("trundle", new ComboBox("切换 巨魔脚本 : ", 0, "ElTrundle", "FastTrundle"));
                 }
                 if (Player.ChampionName.Equals(Champion[35]))
                 {
-                    Miscc.Add("gangplank", new ComboBox("Use addon for GangPlank : ", 0, "UnderratedAIO"));
+                    Miscc.Add("gangplank", new ComboBox("切换 船长脚本 : ", 0, "UnderratedAIO"));
                 }
                 if (Player.ChampionName.Equals(Champion[36]))
                 {
-                    Miscc.Add("poppy", new ComboBox("Use addon for Poppy : ", 0, "UnderratedAIO", "BadaoKingdom"));
+                    Miscc.Add("poppy", new ComboBox("切换 波比脚本 : ", 0, "UnderratedAIO", "BadaoKingdom"));
                 }
                 if (Player.ChampionName.Equals(Champion[37]))
                 {
-                    Miscc.Add("shaco", new ComboBox("Use addon for Shaco : ", 0, "UnderratedAIO", "ChewyMoon's Shaco"));
+                    Miscc.Add("shaco", new ComboBox("切换 小丑脚本 : ", 0, "UnderratedAIO", "ChewyMoon's Shaco"));
                 }
                 if (Player.ChampionName.Equals(Champion[38]))
                 {
-                    Miscc.Add("leblanc", new ComboBox("Use addon for LeBlanc : ", 0, "PopBlanc", "xQx LeBlanc", "FreshBooster"));
+                    Miscc.Add("leblanc", new ComboBox("切换 妖姬脚本 : ", 0, "PopBlanc", "xQx LeBlanc", "FreshBooster"));
                 }
                 if (Player.ChampionName.Equals(Champion[39]))
                 {
-                    Miscc.Add("Ekko", new ComboBox("Use addon for Ekko : ", 0, "OKTW", "ElEkko", "EkkoGod"));
+                    Miscc.Add("Ekko", new ComboBox("切换 艾克脚本 : ", 0, "OKTW", "ElEkko", "EkkoGod"));
                 }
                 if (Player.ChampionName.Equals(Champion[40]))
                 {
-                    Miscc.Add("Rumble", new ComboBox("Use addon for Rumble : ", 0, "Underrated Rumble", "ElRumble"));
+                    Miscc.Add("Rumble", new ComboBox("切换 兰博脚本 : ", 0, "Underrated Rumble", "ElRumble"));
                 }
                 if (Player.ChampionName.Equals(Champion[41]))
                 {
-                    Miscc.Add("Riven", new ComboBox("Use addon for Riven : ", 0, "NechritoRiven", "Heaven Strike Riven", "KurisuRiven"));
+                    Miscc.Add("Riven", new ComboBox("切换 瑞文脚本 : ", 0, "NechritoRiven", "Heaven Strike Riven", "KurisuRiven"));
                 }
                 if (Player.ChampionName.Equals(Champion[42]))
                 {
-                    Miscc.Add("Graves", new ComboBox("Use addon for Graves : ", 0, "OKTW", "D-Graves"));
+                    Miscc.Add("Graves", new ComboBox("切换 男抢脚本 : ", 0, "OKTW", "D-Graves"));
                 }
                 if (Player.ChampionName.Equals(Champion[43]))
                 {
-                    Miscc.Add("Elise", new ComboBox("Use addon for Elise : ", 0, "GFuel Elise", "D-Elise"));
+                    Miscc.Add("Elise", new ComboBox("切换 蜘蛛脚本 : ", 0, "GFuel Elise", "D-Elise"));
                 }
                 if (Player.ChampionName.Equals(Champion[44]))
                 {
-                    Miscc.Add("rengar", new ComboBox("Use addon for Rengar : ", 0, "ElRengar", "D-Rengar", "PrideStalker"));
+                    Miscc.Add("rengar", new ComboBox("切换 狮子狗脚本 : ", 0, "ElRengar", "D-Rengar", "PrideStalker"));
                 }
                 if (Player.ChampionName.Equals(Champion[45]))
                 {
-                    Miscc.Add("zed", new ComboBox("Use addon for Zed : ", 0, "ValvraveSharp", "Ze-D is Back", "iDZed"));
+                    Miscc.Add("zed", new ComboBox("切换 酒劫脚本 : ", 0, "ValvraveSharp", "Ze-D is Back", "iDZed"));
                 }
                 if (Player.ChampionName.Equals(Champion[46]))
                 {
-                    Miscc.Add("ahri", new ComboBox("Use addon for Ahri : ", 0, "OKTW", "AhriSharp"));
+                    Miscc.Add("ahri", new ComboBox("切换 阿里脚本 : ", 0, "OKTW", "AhriSharp"));
                 }
                 if (Player.ChampionName.Equals(Champion[47]))
                 {
-                    Miscc.Add("reksai", new ComboBox("Use addon for RekSai : ", 0, "D-RekSai", "HeavenStrike"));
+                    Miscc.Add("reksai", new ComboBox("切换 挖掘机脚本RekSai : ", 0, "D-RekSai", "HeavenStrike"));
                 }
                 if (Player.ChampionName.Equals(Champion[48]))
                 {
-                    Miscc.Add("volibear", new ComboBox("Use addon for VoliBear : ", 0, "Underrated Voli", "VoliPower"));
+                    Miscc.Add("volibear", new ComboBox("切换 雷霆咆哮脚本 : ", 0, "Underrated Voli", "VoliPower"));
                 }
                 if (Player.ChampionName.Equals(Champion[49]))
                 {
-                    Miscc.Add("anivia", new ComboBox("Use addon for Anivia : ", 0, "OKTW", "ExorAnivia"));
+                    Miscc.Add("anivia", new ComboBox("切换 冰鸟脚本 : ", 0, "OKTW", "ExorAnivia"));
                 }
                 if (Player.ChampionName.Equals(Champion[50]))
                 {
-                    Miscc.Add("taliyah", new ComboBox("Use addon for Taliyah : ", 0, "Taliyah", "TophSharp"));
+                    Miscc.Add("taliyah", new ComboBox("切换 塔莉亚脚本 : ", 0, "Taliyah", "TophSharp"));
                 }
                 if (Player.ChampionName.Equals(Champion[51]))
                 {
-                    Miscc.Add("janna", new ComboBox("Use addon for Janna : ", 0, "LCS Janna", "FreshBooster"));
+                    Miscc.Add("janna", new ComboBox("切换 风女脚本 : ", 0, "LCS Janna", "FreshBooster"));
                 }
                 if (Player.ChampionName.Equals(Champion[52]))
                 {
-                    Miscc.Add("irelia", new ComboBox("Use addon for Irelia : ", 0, "ChallengerSeries", "IreliaGOD", "Irelia II"));
+                    Miscc.Add("irelia", new ComboBox("切换 刀妹脚本 : ", 0, "挑战者系列", "IreliaGOD", "Irelia II"));
                 }
                 if (Player.ChampionName.Equals(Champion[53]))
                 {
-                    Miscc.Add("sivir", new ComboBox("Use addon for Sivir : ", 0, "OKTW", "ExorAIO SDK"));
+                    Miscc.Add("sivir", new ComboBox("切换 战争女神脚本 : ", 0, "OKTW", "ExorAIO SDK"));
                 }
                 if (Player.ChampionName.Equals(Champion[54]))
                 {
-                    Miscc.Add("jarvan", new ComboBox("Use addon for Jarvan : ", 0, "BrianSharp", "D_Jarvan"));
+                    Miscc.Add("jarvan", new ComboBox("切换 J4脚本 : ", 0, "BrianSharp", "D_Jarvan"));
                 }
                 if (Player.ChampionName.Equals(Champion[55]))
                 {
-                    Miscc.Add("braum", new ComboBox("Use addon for Braum : ", 0, "OKTW", "FreshBooster"));
+                    Miscc.Add("braum", new ComboBox("切换 巴隆脚本 : ", 0, "OKTW", "FreshBooster"));
                 }
                 if (Player.ChampionName.Equals(Champion[56]))
                 {
-                    Miscc.Add("karma", new ComboBox("Use addon for Karma : ", 0, "Spirit Karma", "Esk0r Karma"));
+                    Miscc.Add("karma", new ComboBox("切换 天启者脚本 : ", 0, "Spirit Karma", "Esk0r Karma"));
                 }
                 if (Player.ChampionName.Equals(Champion[57]))
                 {
-                    Miscc.Add("teemo", new ComboBox("Use addon for Teemo : ", 0, "Sharpshooter", "Swiftly Teemo"));
+                    Miscc.Add("teemo", new ComboBox("切换 提莫脚本 : ", 0, "Sharpshooter", "Swiftly Teemo"));
                 }
             }
             else
             {
-                Miscc.AddLabel("This champion is not supported for these feature.");
+                Miscc.AddLabel("此英雄暂不支持此功能.");
             }
             Miscc.AddSeparator();
             Miscc.AddGroupLabel("选择加载内容");
@@ -456,6 +457,7 @@ namespace PortAIO.Utility
             Miscc.Add("pastingSharp", new CheckBox("开启 PastingSharp?", false));
             //Miscc.Add("VCursor", new CheckBox("Enable VCursor?", false));
             Miscc.Add("autoJungle", new CheckBox("开启 爱台湾自动打野?", false));
+            Miscc.Add("orbwalker", new CheckBox("开启 L# 走砍 (BETA)?", false));
             Miscc.AddSeparator();
             Miscc.AddGroupLabel("功能切换 :");
             Miscc.Add("evadeCB", new ComboBox("躲避切换?", 0, "ezEvade", "Evade#"));
