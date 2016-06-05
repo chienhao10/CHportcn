@@ -1337,6 +1337,7 @@ namespace AutoJungle
             menu.Add("State", new CheckBox("显示 游戏状态", false));
             menu.AddLabel("合成打野装备后，F5将会导致挂机停止！");
             menu.AddLabel("支持的英雄: 易,狼人,龙女,赵信,武器,梦魇,寡妇,雷霆,蛮王");
+            menu.AddLabel("如果此脚本有问题，麻烦回报给Chienhao或者L#的LOVETAIWAN");
         }
 
         #endregion
